@@ -1,0 +1,186 @@
+/** @format */
+
+.chance_container {
+  position: relative;
+  /* margin-top: 70px; */
+  font-family: var(--normal-font);
+  height: 500px;
+  margin-bottom: 50px;
+}
+
+.chance_bg--img {
+  background-image: url("../../../assets/img/chance_img.png");
+  width: 100vw;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.chance_bg {
+  height: 100%;
+  background: #603809;
+  opacity: 0.8;
+}
+
+.chance_main.wide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin-right: 0;
+}
+
+.chance_left {
+  display: flex;
+  flex-direction: column;
+  /* height: 100%; */
+  justify-content: center;
+  padding-right: 100px;
+}
+
+.chance_btn {
+  width: 120px;
+}
+
+.chance_right {
+  position: relative;
+  height: 100%;
+}
+
+.chance_coffee--bean {
+  position: absolute;
+  background-image: url(../../../assets/img/bean.png);
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.chance_coffee--cup {
+  position: absolute;
+  background-image: url(../../../assets/img/cup.png);
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+  left: 20%;
+  top: 12%;
+  bottom: 0;
+  width: 55%;
+  height: 75%;
+}
+
+.chance_heading {
+  font-weight: 660;
+  font-size: 45px;
+  line-height: 60px;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.chance_text {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 34px;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 740px) {
+  .chance_main {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .chance_container {
+    height: 300px;
+  }
+
+  .chance_heading {
+    font-size: 30px;
+    line-height: 35px;
+  }
+
+  .chance_text {
+    font-size: 15px;
+    line-height: 20px;
+  }
+
+  .chance_left {
+    padding: 0;
+    padding-left: 15px;
+  }
+}
+
+@media (min-width: 740px) and (max-width: 1023px) {
+  .chance_main {
+    margin-right: -16px;
+    padding-left: 45px;
+  }
+
+  .chance_container {
+    height: 400px;
+  }
+
+  .chance_heading {
+    font-size: 40px;
+    line-height: 52px;
+  }
+
+  .chance_text {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  .chance_left {
+    padding: 0;
+    padding-left: 15px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1239px) {
+  /* .chance_main.wide {
+    margin-right: 0;
+  } */
+
+  .chance_left {
+    padding: 0;
+    padding-top: 120px;
+    padding-left: 20px;
+  }
+}
+
+@media (max-width: 540px) {
+  .chance_container {
+    height: 200px;
+  }
+
+  .chance_left {
+    flex: 0 0 70%;
+    max-width: 70%;
+  }
+
+  .chance_right {
+    flex: 0 0 30%;
+    max-width: 30%;
+  }
+
+  .chance_heading {
+    font-size: 23px;
+    line-height: 28px;
+  }
+
+  .chance_text {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .chance_btn {
+    width: 120px;
+  }
+}

@@ -1,0 +1,9 @@
+.home_page {
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+}
+
+.home_page > :last-child {
+    margin-top: -70px;
+} 

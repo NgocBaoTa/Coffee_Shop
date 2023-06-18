@@ -1,0 +1,26 @@
+/** @format */
+
+.header_img {
+  background-image: url("../../../assets/img/coffee_image.png");
+  width: 100vw;
+  height: 600px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.header_bg {
+  position: relative;
+  height: 600px;
+  background: linear-gradient(
+    89.82deg,
+    #1e1e1e -6.88%,
+    rgba(0, 0, 0, 0) 87.45%
+  );
+}
+
+@media (max-width: 740px) {
+  .grid.wide.container {
+    margin-left: 16px;
+  }
+}

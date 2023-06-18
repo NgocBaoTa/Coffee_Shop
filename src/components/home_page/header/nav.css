@@ -1,0 +1,141 @@
+/** @format */
+
+.nav_container {
+  font-family: var(--normal-font);
+  display: flex;
+  padding-top: 10px;
+}
+
+.nav_container a {
+  text-decoration: none;
+}
+
+.nav_container .nav_logo .nav_logo--name {
+  font-family: var(--heading-font);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 46px;
+  color: #fff;
+  text-align: left;
+}
+
+.nav_center--item,
+.nav_right--item {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  color: #fff;
+}
+
+.nav_center--item:hover, .nav_right--item:hover, .nav_center--item.active {
+  color: var(--button-color)
+}
+
+.nav_main.l-8,
+.nav_right.l-5,
+.nav_center.l-6 {
+  display: flex;
+}
+
+.nav_main,
+.nav_center,
+.nav_right {
+  padding-top: 7px;
+}
+
+.nav_main {
+  text-align: center;
+}
+
+.nav_right {
+  text-align: right;
+  display: flex;
+  align-items: center;
+}
+
+.nav_right--signup button {
+  background: #f9c06a;
+  box-shadow: 0px 6px 12px rgba(249, 192, 106, 0.22);
+  border-radius: 24px;
+  color: #1e1e1e;
+  border-style: none;
+  padding: 10px 18px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+.nav_right--signup {
+  margin-top: -10px;
+}
+
+.nav_button {
+  display: none;
+}
+
+.nav_right--card.nav_right--item:hover {
+  color: #fff;
+}
+
+.nav_right--card {
+  cursor: pointer;
+  margin-top: -3px;
+}
+
+.nav_right--avatar {
+  margin-top: -14px;
+}
+
+@media (max-width: 740px) {
+  .nav_main.active {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    height: auto;
+    width: 100%;
+    margin-top: -10px;
+    margin-left: -15px;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    font-size: 16px;
+    transform: translate(0%);
+    transition: transform linear 0.5s;
+  }
+
+  .nav_container {
+    z-index: 1;
+  }
+  .nav_main.active .nav_center,
+  .nav_main.active .nav_right {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nav_main.active .nav_right--signup {
+    margin-top: 0;
+  }
+
+  .nav_main.active .nav_right--item,
+  .nav_main.active .nav_center--item {
+    padding-bottom: 4px;
+  }
+
+  .nav_main.active .nav_right--signup button {
+    background-color: black;
+    color: #fff;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .nav_button {
+    display: block;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 10;
+  }
+}

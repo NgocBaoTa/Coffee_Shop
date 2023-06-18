@@ -1,0 +1,14 @@
+/** @format */
+
+.button_format {
+  background: var(--button-color);
+  box-shadow: 0px 6px 12px rgba(249, 192, 106, 0.22);
+  border-radius: 24px;
+  color: #1e1e1e;
+  border-style: none;
+  padding: 10px 20px;
+  font-family: var(--normal-font);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+}

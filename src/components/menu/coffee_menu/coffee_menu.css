@@ -1,0 +1,145 @@
+/** @format */
+
+.coffee_menu_container {
+  padding: 0 50px;
+  text-align: center;
+}
+
+.coffee_menu--heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--header-font);
+}
+
+.coffee_menu--heading-icon {
+  width: 80px;
+  margin: 0 20px;
+  height: 1.5px;
+  background-color: var(--black-color);
+}
+
+.coffee_menu--heading-text {
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 50px;
+  color: var(--black-color);
+}
+
+.coffee_menu--main {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  font-family: var(--normal-font);
+  justify-content: space-between;
+  row-gap: 30px;
+}
+
+.coffee_menu--item {
+  max-width: 500px;
+  flex: 0 0 45%;
+}
+
+.coffee_menu--item-info {
+  display: flex;
+  align-items: center;
+}
+
+.coffee_menu--item-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.coffee_menu--item-desc {
+  flex: auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.coffee_menu--item-name {
+  color: var(--coffee-color);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 22px;
+}
+
+.coffee_menu--item-text {
+  color: var(--grey-color);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.coffee_menu--item-price {
+  color: var(--black-color);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.coffee_menu--item-line {
+  height: 1px;
+}
+
+@media (min-width: 740px) and (max-width: 1023px) {
+  .coffee_menu_container {
+    padding: 0;
+  }
+}
+
+@media (max-width: 740px) {
+  .coffee_menu_container {
+    padding: 0 16px;
+  }
+
+  .coffee_menu--main {
+    margin-top: 30px;
+  }
+
+  .coffee_menu--item-img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .coffee_menu--item-desc {
+    gap: 8px;
+    padding: 0 15px;
+  }
+
+  .coffee_menu--item-name {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .coffee_menu--item-text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .coffee_menu--item-price {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+@media (max-width: 540px) {
+  .coffee_menu--main {
+    justify-content: center;
+  }
+
+  .coffee_menu--item {
+    flex: 0 0 80%;
+  }
+
+  .coffee_menu--heading-text {
+    font-size: 30px;
+    line-height: 35px;
+  }
+}

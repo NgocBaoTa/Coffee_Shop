@@ -1,0 +1,21 @@
+/** @format */
+
+.productList_container {
+  padding-top: 70px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 30px;
+}
+
+.product_pagination {
+  background-color: #fff;
+  margin-top: 50px;
+  color: #fff;
+}
+
+@media (max-width: 540px) {
+  .productList_container {
+    padding-top: 50px;
+  }
+}

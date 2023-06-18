@@ -1,0 +1,41 @@
+/** @format */
+
+.box_container {
+  position: absolute;
+  width: 500px;
+  top: 140px;
+  z-index: 0;
+}
+
+.box_main {
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.box_main--text {
+  font-family: var(--normal-font);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.box_main--coffee {
+  font-family: var(--heading-font);
+  font-weight: 400;
+  font-size: 150px;
+  line-height: 200px;
+}
+
+@media (max-width: 740px) {
+  .box_container {
+    width: 90%;
+  }
+
+  .box_main--text {
+    font-size: 16px;
+  }
+
+  .box_main--coffee {
+    font-size: 130px;
+  }
+}

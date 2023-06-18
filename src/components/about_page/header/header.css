@@ -1,0 +1,25 @@
+/** @format */
+
+.about_header--img {
+  background-image: url("https://hekhacbiet.com/wp-content/uploads/2022/12/hinh-anh-ly-cafe-buon-39.jpg");
+  /* background-image: url("https://images3.alphacoders.com/130/1304997.jpeg"); */
+  /* background-image: url("https://rare-gallery.com/uploads/posts/500235-coffee-hd-wallpapers.jpg"); */
+
+  width: 100vw;
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media (max-width: 740px) {
+  .about_header--nav {
+    margin-left: 16px;
+  }
+}
+
+@media (max-width: 540px) {
+  .about_header--img {
+    height: 300px;
+  }
+}

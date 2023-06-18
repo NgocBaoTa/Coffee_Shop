@@ -1,0 +1,98 @@
+/** @format */
+
+.coffee_story--container {
+  display: flex;
+}
+
+.coffee_story--text {
+  width: 70%;
+  padding-right: 70px;
+  font-family: var(--normal-font);
+  letter-spacing: 1px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.coffee_story--heading {
+  color: var(--coffee-color);
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 30px;
+}
+
+.coffee_story--element {
+  font-size: 16px;
+  color: var(--black-color);
+  line-height: 25px;
+}
+
+.coffee_story--image {
+  background-image: url("https://staging.hartmillerdesign.co.uk/wp-content/uploads/2021/06/coffee-shop-interiors_origin_shop-1024x739-1.jpg");
+  width: 30%;
+  height: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media (max-width: 1023px) {
+  .coffee_story--text {
+    width: 60%;
+    padding-right: 30px;
+  }
+
+  .coffee_story--image {
+    width: 40%;
+    height: auto;
+  }
+}
+
+@media (max-width: 740px) {
+  .coffee_story--container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .coffee_story--text {
+    width: 65%;
+    padding-right: 30px;
+  }
+
+  .coffee_story--image {
+    width: 35%;
+    height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .coffee_story--container {
+    flex-direction: column;
+    padding: 0;
+  }
+  .coffee_story--text {
+    width: 80%;
+    padding-right: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25px;
+  }
+
+  .coffee_story--image {
+    width: 80%;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 350px) {
+  .coffee_story--text {
+    width: 90%;
+  }
+
+  .coffee_story--image {
+    width: 90%;
+    height: 170px;
+  }
+}

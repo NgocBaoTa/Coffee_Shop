@@ -1,0 +1,27 @@
+/** @format */
+
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Questrial&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+:root {
+  --grey-color: #707070;
+  --button-color: #f9c06a;
+  --button2-color: #faac36;
+  --coffee-color: #603809;
+  --bg-item-color: #fff9f1;
+  --black-color: #1e1e1e;
+  --heading-font: "Dancing Script", cursive;
+  --normal-font: "Questrial", sans-serif;
+  --header-font: "Bebas Neue", sans-serif;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 100%;
+  line-height: 1.125rem;
+  box-sizing: border-box;
+  font-family: var(--normal-front);
+}

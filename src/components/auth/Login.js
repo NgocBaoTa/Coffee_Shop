@@ -21,7 +21,7 @@ function Login() {
 
     try {
       const data = await handleSubmit(email, password);
-      console.log("DATA:",data);
+      // console.log("DATA:",data);
       if (data.data && data.data.success !== true) {
         setErrMessage(data.data.message);
       } else {

@@ -87,6 +87,15 @@
   margin-top: -14px;
 }
 
+.nav_right--profile {
+  text-decoration: none;
+  color: var(--black-color);
+}
+
+.nav_right--logout:hover, .nav_right--profile:hover {
+color: var(--button2-color)
+}
+
 @media (max-width: 740px) {
   .nav_main.active {
     position: fixed;

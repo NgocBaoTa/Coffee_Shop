@@ -142,14 +142,14 @@ function Nav() {
             <div className="l-2 m-0"></div>
             {login ? (
               <>
-                <div className="l-2 m-0"></div>
-                <div className="nav_right--card nav_right--item l-4 m-5">
+                <div className="l-4 m-0"></div>
+                <div className="nav_right--card nav_right--item l-3 m-5">
                   <Badge color="primary" badgeContent={100}>
                     <ShoppingCartOutlinedIcon sx={{ fontSize: 26 }} />
                   </Badge>
                 </div>
 
-                <div className="nav_right--avatar nav_right--item l-4 m-7">
+                <div className="nav_right--avatar nav_right--item l-3 m-7">
                   <Box sx={{ flexGrow: 0 }}>
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                       <Stack direction="row" spacing={2}>
@@ -178,10 +178,18 @@ function Nav() {
                       onClose={handleCloseUserMenu}
                     >
                       <MenuItem onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">Profile</Typography>
+                        <Typography textAlign="center">
+                          <NavLink to="/profile" className="nav_right--profile">
+                            Profile
+                          </NavLink>
+                        </Typography>
                       </MenuItem>
                       <MenuItem onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center" onClick={handleLogout}>
+                        <Typography
+                          textAlign="center"
+                          onClick={handleLogout}
+                          className="nav_right--logout"
+                        >
                           Logout
                         </Typography>
                       </MenuItem>

@@ -24,11 +24,12 @@ function ContentModal(props) {
     boxShadow: 24,
     // p: 3,
     overflowY: "auto",
-    padding: "30px 20px",
+    // padding: "30px 20px",
     // color: "yellow",
   };
   return (
-    <div className="singleCard l-2-4 m-4 c-6 col">
+    // <div className="singleCard l-2-4 m-4 c-6 col">
+    <>
       <div
         className="media"
         style={{ cursor: "pointer" }}
@@ -56,21 +57,16 @@ function ContentModal(props) {
         </div>
         <div className="content_modal--container">
           <div className="l-5 m-5 c-12 col modal_img">
-            <img
-              className="modal_img"
-              src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2022%2F10%2FRapper-Jadakiss-Debuts-Family-Coffee-Line-40-Years-in-the-Making-0.jpg?w=960&cbr=1&q=90&fit=max"
-              alt="coffee"
-            />
-            {/* <img className="modal_img" src={props.src} alt="coffee" /> */}
+            <img className="modal_img" src={props.src} alt="coffee" />
           </div>
 
           <div className="l-7 m-7 c-12 col modal_info--container">
             <div className="modal_info">
               <div className="modal_info--main">
-                {/* <div className="modal_main--name">{props.name}</div> */}
-                <div className="modal_main--name">ORGANIC COFFEE</div>
-                <div className="modal_main--price">$21.3</div>
-                {/* <div className="modal_main--price">{props.price}</div> */}
+                <div className="modal_main--name">{props.name}</div>
+                {/* <div className="modal_main--name">ORGANIC COFFEE</div> */}
+                {/* <div className="modal_main--price">$21.3</div> */}
+                <div className="modal_main--price">${props.price}</div>
                 <hr className="modal_main--hr"></hr>
                 <div className="modal_main--group">
                   <div className="modal_main--input">
@@ -86,7 +82,7 @@ function ContentModal(props) {
                   </div>
                   <div className="modal_main--icon">
                     <ShoppingCartCheckoutRoundedIcon className="modal_icon--item modal_main--cart" />
-                    {!props.isLoved ? (
+                    {!props.isLiked ? (
                       <FavoriteBorderRoundedIcon className="modal_icon--item modal_main--love" />
                     ) : (
                       <FavoriteRoundedIcon className="modal_icon--item modal_main--loved" />
@@ -95,31 +91,36 @@ function ContentModal(props) {
                 </div>
               </div>
               <div className="modal_info--description">
-                {/* <div className="modal_info--desc">{props.description}</div> */}
-                <div className="modal_info--desc">
+                {props.description ? (
+                  <div className="modal_info--desc">{props.description}</div>
+                ) : (
+                  <></>
+                )}
+                {/* <div className="modal_info--desc">
                   Okapi's artisan-grown Ugandan Specialty Highland Coffee has
-                  rich chocolate overtones with bright citrus and floral notes.
-                </div>
-                {/* {props.story ? (
+                  rich chocolate overtones with bright citrus and floral
+                  notes.
+                </div> */}
+                {props.story ? (
                   <div className="modal_info--story">
                     <div className="modal_desc--heading">STORY</div>
                     <div className="modal_desc--story">{props.story}</div>
                   </div>
                 ) : (
                   <></>
-                )} */}
-                <div className="modal_info--story">
+                )}
+                {/* <div className="modal_info--story">
                   <div className="modal_desc--heading">STORY</div>
                   <div className="modal_desc--story">
                     Okapi's artisan-grown Ugandan Specialty Highland Coffee has
                     rich chocolate overtones with bright citrus and floral
                     notes.
                   </div>
-                </div>
+                </div> */}
                 <div className="modal_info--details">
                   <div className="modal_desc--heading">DETAILS</div>
                   <ul className="modal_details--list">
-                    <li className="modal_details--item">
+                    {/* <li className="modal_details--item">
                       Shipping cost is applied for each shipment.
                     </li>
 
@@ -133,14 +134,14 @@ function ContentModal(props) {
 
                     <li className="modal_details--item">
                       Future orders can be modified or cancelled at any point.
-                    </li>
-                    {/* {props.details.map((item, index) => {
+                    </li> */}
+                    {props.details.map((item, index) => {
                       return (
                         <li key={index} className="modal_details--item">
                           {item}
                         </li>
                       );
-                    })} */}
+                    })}
                   </ul>
                 </div>
               </div>
@@ -148,7 +149,8 @@ function ContentModal(props) {
           </div>
         </div>
       </Dialog>
-    </div>
+    </>
+    // </div>
   );
 }
 

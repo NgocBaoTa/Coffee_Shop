@@ -1,12 +1,14 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./recommended.css";
 import SingleProduct from "../single_product/SingleProduct";
 import Button from "../../button/Button";
 import axios from "axios";
+import { LoginContext } from "../../../context/AuthContext";
 
 function Recommended() {
+  const { login } = useContext(LoginContext);
   const [products, setProducts] = useState([]);
   const fetchData = async () => {
     try {
@@ -14,15 +16,29 @@ function Recommended() {
         "https://coffee-shops.herokuapp.com/products/recommend-products"
       );
 
-      setProducts(data.data);
-      console.log(products);
+      if (login) {
+        let productArr = data.data;
+        const wishlistItems = JSON.parse(localStorage.getItem("user")).wishlist;
+
+        wishlistItems.forEach((item) => {
+          const product = productArr.find((p) => p._id === item);
+          if (product) {
+            product.isLiked = true;
+          }
+        });
+        setProducts(productArr);
+      } else {
+        setProducts(data.data);
+      }
     } catch (error) {
       console.log(error.message);
     }
   };
+
   useEffect(() => {
     fetchData();
   }, []);
+
   return (
     <div className="recommended_container grid wide">
       <div className="recommended_heading">Recommended products</div>
@@ -30,17 +46,15 @@ function Recommended() {
         We don’t just make your coffee, we make your day!
       </div>
 
-      {/* render list new blend style:
-              - check the coffee product
-              - which one new  => render in this list  */}
       <ul className="recommended_list">
-        {products.map((item, index) => {
+        {products.map((item) => {
           return (
             <SingleProduct
               src={item.productImage}
               name={item.productName}
               price={item.productPrice.toFixed(2)}
               key={item._id}
+              isLiked={item.isLiked ? item.isLiked : false}
             />
           );
         })}
@@ -49,7 +63,7 @@ function Recommended() {
           name="Cappuccino"
           price="8.50"
           isProduct={true}
-          isLoved={false}
+          isLiked={false}
         /> */}
       </ul>
 

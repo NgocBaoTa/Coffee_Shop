@@ -1,5 +1,9 @@
 /** @format */
 
+.media {
+  height: 80%;
+}
+
 ::-webkit-scrollbar {
   width: 7px;
 }
@@ -25,7 +29,8 @@
 
 .content_modal--container {
   display: flex;
-  padding: 15px 10px;
+  padding: 25px 15px;
+  /* max-height: 80vh; */
 }
 
 .modal_img {
@@ -104,6 +109,10 @@
 .modal_main--icon .modal_icon--item {
   cursor: pointer;
   font-size: 25px;
+}
+
+.modal_main--loved {
+  color: red;
 }
 
 .modal_info--description {

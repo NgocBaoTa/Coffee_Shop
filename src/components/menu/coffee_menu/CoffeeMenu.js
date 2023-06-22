@@ -1,9 +1,28 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./coffee_menu.css";
+import axios from "axios";
 
 function CoffeeMenu() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let data = await axios.get(
+          "https://coffee-shops.herokuapp.com/products?categoryName=Coffee"
+        );
+
+        setProducts(data.data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchData();
+  }, []);
+
+
   return (
     <div className="coffee_menu_container grid wide">
       <div className="coffee_menu--heading">
@@ -13,100 +32,32 @@ function CoffeeMenu() {
       </div>
 
       <div className="coffee_menu--main">
-        <div className="coffee_menu--item">
-          <div className="coffee_menu--item-info">
-            <img
-              className="coffee_menu--item-img"
-              src="https://www.acouplecooks.com/wp-content/uploads/2021/08/Cafe-Au-Lait-001s.jpg"
-              alt="coffee"
-            />
-            <div className="coffee_menu--item-desc">
-              <div className="coffee_menu--item-name">Cappuccino</div>
-              <div className="coffee_menu--item-text">
-                Lorem ipsum dolor sit abc
+        {products.map((item) => {
+          return (
+            <div className="coffee_menu--item" key={item._id}>
+              <div className="coffee_menu--item-info">
+                <img
+                  className="coffee_menu--item-img"
+                  src={item.productImage}
+                  alt="coffee"
+                />
+                <div className="coffee_menu--item-desc">
+                  <div className="coffee_menu--item-name">
+                    {item.productName}
+                  </div>
+                  <div className="coffee_menu--item-text">
+                    {item.productDescription.description}
+                  </div>
+                </div>
+                <div className="coffee_menu--item-price">
+                  ${item.productPrice.toFixed(2)}
+                </div>
               </div>
+
+              <hr className="coffee_menu--item-line" />
             </div>
-            <div className="coffee_menu--item-price">$12.00</div>
-          </div>
-
-          <hr className="coffee_menu--item-line" />
-        </div>
-
-        <div className="coffee_menu--item">
-          <div className="coffee_menu--item-info">
-            <img
-              className="coffee_menu--item-img"
-              src="https://www.acouplecooks.com/wp-content/uploads/2021/08/Cafe-Au-Lait-001s.jpg"
-              alt="coffee"
-            />
-            <div className="coffee_menu--item-desc">
-              <div className="coffee_menu--item-name">Cappuccino</div>
-              <div className="coffee_menu--item-text">
-                Lorem ipsum dolor sit abc
-              </div>
-            </div>
-            <div className="coffee_menu--item-price">$12.00</div>
-          </div>
-
-          <hr className="coffee_menu--item-line" />
-        </div>
-
-        <div className="coffee_menu--item">
-          <div className="coffee_menu--item-info">
-            <img
-              className="coffee_menu--item-img"
-              src="https://www.acouplecooks.com/wp-content/uploads/2021/08/Cafe-Au-Lait-001s.jpg"
-              alt="coffee"
-            />
-            <div className="coffee_menu--item-desc">
-              <div className="coffee_menu--item-name">Cappuccino</div>
-              <div className="coffee_menu--item-text">
-                Lorem ipsum dolor sit abc
-              </div>
-            </div>
-            <div className="coffee_menu--item-price">$12.00</div>
-          </div>
-
-          <hr className="coffee_menu--item-line" />
-        </div>
-
-        <div className="coffee_menu--item">
-          <div className="coffee_menu--item-info">
-            <img
-              className="coffee_menu--item-img"
-              src="https://www.acouplecooks.com/wp-content/uploads/2021/08/Cafe-Au-Lait-001s.jpg"
-              alt="coffee"
-            />
-            <div className="coffee_menu--item-desc">
-              <div className="coffee_menu--item-name">Cappuccino</div>
-              <div className="coffee_menu--item-text">
-                Lorem ipsum dolor sit abc
-              </div>
-            </div>
-            <div className="coffee_menu--item-price">$12.00</div>
-          </div>
-
-          <hr className="coffee_menu--item-line" />
-        </div>
-
-        <div className="coffee_menu--item">
-          <div className="coffee_menu--item-info">
-            <img
-              className="coffee_menu--item-img"
-              src="https://www.acouplecooks.com/wp-content/uploads/2021/08/Cafe-Au-Lait-001s.jpg"
-              alt="coffee"
-            />
-            <div className="coffee_menu--item-desc">
-              <div className="coffee_menu--item-name">Cappuccino</div>
-              <div className="coffee_menu--item-text">
-                Lorem ipsum dolor sit abc
-              </div>
-            </div>
-            <div className="coffee_menu--item-price">$12.00</div>
-          </div>
-
-          <hr className="coffee_menu--item-line" />
-        </div>
+          );
+        })}
       </div>
     </div>
   );

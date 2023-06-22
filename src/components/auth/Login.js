@@ -10,7 +10,7 @@ import LockSharpIcon from "@mui/icons-material/LockSharp";
 
 function Login() {
   const navigate = useNavigate();
-  const { setLogin, setSignup, signup } = useContext(LoginContext);
+  const { setLogin} = useContext(LoginContext);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [errMessage, setErrMessage] = useState("");
@@ -21,11 +21,16 @@ function Login() {
 
     try {
       const data = await handleSubmit(email, password);
-      // console.log("DATA:",data);
       if (data.data && data.data.success !== true) {
         setErrMessage(data.data.message);
       } else {
-        let user = { user_token: data.data.accessToken, username: data.data.customerName, email: data.data.customerEmail};
+        console.log("DATA", data.data);
+        let user = {
+          user_token: data.data.accessToken,
+          username: data.data.customerName,
+          email: data.data.customerEmail,
+          wishlist: data.data.customerWishlist,
+        };
         localStorage.setItem("user", JSON.stringify(user));
         setLogin(true);
         navigate("/");
@@ -36,7 +41,6 @@ function Login() {
           setErrMessage(e.response.data.message);
         }
       }
-      //console.log("error", e.response);
     }
   };
 
@@ -44,12 +48,11 @@ function Login() {
     return axios.post("https://coffee-shops.herokuapp.com/cus_auth/login", {
       email,
       password,
-      type: "customer"
+      type: "customer",
     });
   };
 
   const clickSignup = (e) => {
-    //setSignup(!signup);
     navigate("/auth/register");
   };
 
@@ -69,7 +72,9 @@ function Login() {
           />
           <div className="login_page--form l-6 m-6 c-12">
             <div className="login_form--heading">
-              <div className="login_form--brand" onClick={goHomePage}>Bean Coffee</div>
+              <div className="login_form--brand" onClick={goHomePage}>
+                Bean Coffee
+              </div>
               <div className="login_form--slogan">
                 Smooth out your day, every day.
               </div>
@@ -104,8 +109,12 @@ function Login() {
                 />
               </div>
 
-              {errMessage !== "" ? <div className="login_form--errorMsg">{errMessage}</div> : <></>}
-              
+              {errMessage !== "" ? (
+                <div className="login_form--errorMsg">{errMessage}</div>
+              ) : (
+                <></>
+              )}
+
               <button className="login_form--btn" onClick={handleLogin}>
                 LOGIN
               </button>

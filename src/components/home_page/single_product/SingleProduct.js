@@ -24,7 +24,7 @@ function SingleItem(props) {
               <></>
             )}
             {/* check if the product is loved (add to favorite list) => show the full heart */}
-            {!props.isLoved ? (
+            {!props.isLiked ? (
               <FavoriteBorderRoundedIcon className="item_icon--love" />
             ) : (
               <FavoriteRoundedIcon className="item_icon--love" />

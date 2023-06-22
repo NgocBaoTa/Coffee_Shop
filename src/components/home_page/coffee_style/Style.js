@@ -1,11 +1,13 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./style.css";
 import SingleProduct from "../single_product/SingleProduct";
 import axios from "axios";
+import { LoginContext } from "../../../context/AuthContext";
 
 function Style() {
+  const { login } = useContext(LoginContext);
   const [products, setProducts] = useState([]);
   const fetchData = async () => {
     try {
@@ -13,12 +15,25 @@ function Style() {
         "https://coffee-shops.herokuapp.com/products/new-coffee"
       );
 
-      setProducts(data.data);
-      console.log(products);
+      if (login) {
+        let productArr = data.data;
+        const wishlistItems = JSON.parse(localStorage.getItem("user")).wishlist;
+
+        wishlistItems.forEach((item) => {
+          const product = productArr.find((p) => p._id === item);
+          if (product) {
+            product.isLiked = true;
+          }
+        });
+        setProducts(productArr);
+      } else {
+        setProducts(data.data);
+      }
     } catch (error) {
       console.log(error.message);
     }
   };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -31,13 +46,14 @@ function Style() {
         experiencing
       </div>
       <ul className="style_list">
-        {products.map((item, index) => {
+        {products.map((item) => {
           return (
             <SingleProduct
               src={item.productImage}
               name={item.productName}
               price={item.productPrice.toFixed(2)}
               key={item._id}
+              isLiked={item.isLiked ? item.isLiked : false}
             />
           );
         })}
@@ -46,7 +62,7 @@ function Style() {
           name="Cappuccino"
           price="8.50"
           isProduct={true}
-          isLoved={false}
+          isLiked={false}
         /> */}
       </ul>
     </div>

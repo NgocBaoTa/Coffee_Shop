@@ -7,28 +7,37 @@ import axios from "axios";
 const LoginContext = createContext();
 
 function LoginProvider({ children }) {
-  //const [signup, setSignup] = useState(true);
-
   const [login, setLogin] = useState(
     localStorage.getItem("user") ? Boolean(localStorage.getItem("user")) : false
   );
 
-  if (login) {
-  }
-  let user = JSON.parse(localStorage.getItem("user"));
+  const [wishlist, setWishList] = useState(
+    JSON.parse(localStorage.getItem("user"))?.wishlist
+  );
+  const [card, setCard] = useState(
+    JSON.parse(localStorage.getItem("user"))?.card
+  );
 
+  // console.log(wishlist);
   useEffect(() => {
     if (login) {
       const updateData = async () => {
         try {
           let data = await axios.put(
-            "https://coffee-shops.herokuapp.com/customers/",
+            "https://coffee-shops.herokuapp.com/customers",
             {
-              wishlist: user.wishlist,
+              card,
+              wishlist,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${
+                  JSON.parse(localStorage.getItem("user")).user_token
+                }`,
+              },
             }
           );
-
-          // console.log(data.data);
+          // console.log(data);
         } catch (error) {
           console.log(error.message);
         }
@@ -36,7 +45,7 @@ function LoginProvider({ children }) {
 
       updateData();
     }
-  }, [login]);
+  }, [login, wishlist, card]);
 
   return (
     <div>
@@ -44,8 +53,10 @@ function LoginProvider({ children }) {
         value={{
           login,
           setLogin: (value) => setLogin(value),
-          //signup,
-          //setSignup,
+          wishlist,
+          setWishList,
+          card,
+          setCard,
         }}
       >
         {children}

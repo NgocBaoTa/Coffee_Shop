@@ -3,10 +3,10 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./assets/css/grid.css";
 import "./assets/css/base.css";
-import Home from "./components/home_page/Home";
-import Menu from "./components/menu/Menu";
-import Product from "./components/product/Product";
-import About from "./components/about_page/About";
+import Home from "./pages/home_page/Home";
+import Menu from "./pages/menu/Menu";
+import Product from "./pages/product/Product";
+import About from "./pages/about_page/About";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 

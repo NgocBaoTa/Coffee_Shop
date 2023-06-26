@@ -1,10 +1,9 @@
 /** @format */
 
 import React from "react";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { LoginContext } from "../../context/AuthContext";
 import PersonIcon from "@mui/icons-material/Person";
 import MailIcon from "@mui/icons-material/Mail";
 import LockSharpIcon from "@mui/icons-material/LockSharp";
@@ -12,7 +11,6 @@ import "./register.css";
 
 const Register = () => {
   const navigate = useNavigate();
-  const { setLogin, setSignup, signup } = useContext(LoginContext);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -55,7 +53,6 @@ const Register = () => {
   };
 
   const clickLogin = (e) => {
-    //setSignup(!signup);
     navigate("/auth/login");
   };
 

@@ -24,12 +24,13 @@ function Login() {
       if (data.data && data.data.success !== true) {
         setErrMessage(data.data.message);
       } else {
-        console.log("DATA", data.data);
+        // console.log("DATA", data.data);
         let user = {
           user_token: data.data.accessToken,
           username: data.data.customerName,
           email: data.data.customerEmail,
           wishlist: data.data.customerWishlist,
+          card: data.data.customerCard,
         };
         localStorage.setItem("user", JSON.stringify(user));
         setLogin(true);

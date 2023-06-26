@@ -17,11 +17,14 @@ const Register = () => {
   const [errMessage, setErrMessage] = useState("");
 
   const handleSubmit = (username, email, password) => {
-    return axios.post("https://coffee-shops.herokuapp.com/cus_auth/register", {
-      username,
-      email,
-      password,
-    });
+    return axios.post(
+      "https://coffee-shop-ony3.onrender.com/cus_auth/register",
+      {
+        username,
+        email,
+        password,
+      }
+    );
   };
 
   const handleRegister = async (e) => {

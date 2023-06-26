@@ -12,7 +12,7 @@ function Style() {
     const fetchData = async () => {
       try {
         let data = await axios.get(
-          "https://coffee-shops.herokuapp.com/products/new-coffee"
+          "https://coffee-shop-ony3.onrender.com/products/new-coffee"
         );
 
         setProducts(data.data);

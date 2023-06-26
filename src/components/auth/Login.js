@@ -46,7 +46,7 @@ function Login() {
   };
 
   const handleSubmit = (email, password) => {
-    return axios.post("https://coffee-shops.herokuapp.com/cus_auth/login", {
+    return axios.post("https://coffee-shop-ony3.onrender.com/cus_auth/login", {
       email,
       password,
       type: "customer",

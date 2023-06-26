@@ -24,7 +24,7 @@ function LoginProvider({ children }) {
       const updateData = async () => {
         try {
           let data = await axios.put(
-            "https://coffee-shops.herokuapp.com/customers",
+            "https://coffee-shop-ony3.onrender.com/customers",
             {
               card,
               wishlist,

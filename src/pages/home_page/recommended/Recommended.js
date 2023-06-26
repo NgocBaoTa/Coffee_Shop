@@ -8,38 +8,6 @@ import SingleCard from "../../../components/single_card/SingleCard";
 import { LoginContext } from "../../../context/AuthContext";
 
 function Recommended() {
-  // const [products, setProducts] = useState([]);
-  // let user = JSON.parse(localStorage.getItem("user"));
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       let data = await axios.get(
-  //         "https://coffee-shops.herokuapp.com/products/recommend-products"
-  //       );
-
-  //       if (user) {
-  //         let productArr = data.data;
-  //         const wishlistItems = user.wishlist;
-
-  //         wishlistItems.forEach((item) => {
-  //           const product = productArr.find((p) => p._id === item);
-  //           if (product) {
-  //             product.isLiked = true;
-  //           }
-  //         });
-  //         setProducts(productArr);
-  //       } else {
-  //         setProducts(data.data);
-  //       }
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
   const { wishlist, setWishList } = useContext(LoginContext);
   const [products, setProducts] = useState([]);
   let user = JSON.parse(localStorage.getItem("user"));
@@ -48,7 +16,7 @@ function Recommended() {
     const fetchData = async () => {
       try {
         let data = await axios.get(
-          "https://coffee-shops.herokuapp.com/products/recommend-products"
+          "https://coffee-shop-ony3.onrender.com/products/recommend-products"
         );
 
         if (user) {

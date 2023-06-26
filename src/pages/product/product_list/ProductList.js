@@ -15,7 +15,7 @@ function ProductList() {
     const fetchData = async () => {
       try {
         let data = await axios.get(
-          "https://coffee-shops.herokuapp.com/products?categoryName=Product"
+          "https://coffee-shop-ony3.onrender.com/products?categoryName=Product"
         );
 
         if (user) {

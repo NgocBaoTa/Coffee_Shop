@@ -23,5 +23,5 @@ html {
   font-size: 100%;
   line-height: 1.125rem;
   box-sizing: border-box;
-  font-family: var(--normal-front);
+  font-family: var(--normal-font);
 }

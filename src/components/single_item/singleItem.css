@@ -36,8 +36,11 @@
 .singleItem_main--name {
   color: var(--coffee-color);
   font-weight: 600;
-  font-size: 20px;
+  font-size: 19px;
   line-height: 20px;
+   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .singleItem_main--description {
@@ -70,7 +73,7 @@
   }
 
   .singleItem_main--name {
-    font-size: 18px;
+    font-size: 17px;
     line-height: 20px;
   }
 

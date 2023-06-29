@@ -9,10 +9,30 @@ import Footer from "../../components/footer/Footer";
 import axios from "axios";
 import { LoginContext } from "../../context/AuthContext";
 
-function Product() {
-  const [searchText, setSearchText] = useState("");
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 
-  const { wishlist, setWishList } = useContext(LoginContext);
+function Product() {
+  const [openAddCard, setOpenAddCard] = useState(false);
+  const [openAlertLogin, setOpenAlertLogin] = useState(false);
+
+  const handleCloseAddCard = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenAddCard(false);
+  };
+
+  const handleCloseAlertLogin = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenAlertLogin(false);
+  };
+
+  const [showSearch, setShowSearch] = useState(false)
+  const [searchText, setSearchText] = useState("");
+  const {setWishList, setCard } = useContext(LoginContext);
   const [products, setProducts] = useState([]);
   let user = JSON.parse(localStorage.getItem("user"));
 
@@ -24,7 +44,7 @@ function Product() {
 
       if (user) {
         let productArr = data.data;
-        wishlist.forEach((item) => {
+        user.wishlist.forEach((item) => {
           const product = productArr.find((p) => p._id === item);
           if (product) {
             product.isLiked = true;
@@ -73,7 +93,7 @@ function Product() {
         return newWishlist;
       });
     } else {
-      console.log("create account");
+      setOpenAlertLogin(true);
     }
   };
 
@@ -85,7 +105,7 @@ function Product() {
 
       if (user) {
         let productArr = data.data;
-        wishlist.forEach((item) => {
+        user.wishlist.forEach((item) => {
           const product = productArr.find((p) => p._id === item);
           if (product) {
             product.isLiked = true;
@@ -110,21 +130,90 @@ function Product() {
     e.preventDefault();
     if (searchText.length > 0) {
       searchProduct();
+      setShowSearch(true);
       // setSearchText("");
     } else {
       fetchData();
     }
   };
 
+  const handleClickCart = (id, noItem) => {
+    if (user) {
+      setCard((prevCard) => {
+        const newCard = [...prevCard];
+
+        let index = -1;
+        newCard.forEach((item, idx) => {
+          if (item.productID === id) {
+            index = idx;
+            return;
+          }
+        });
+        if (index !== -1) {
+          newCard[index].no += noItem;
+        } else {
+          let newProduct = {};
+          newProduct.productID = id;
+          newProduct.no = noItem;
+          newCard.push(newProduct);
+        }
+
+        const updatedUser = { ...user, card: newCard };
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+
+        return newCard;
+      });
+
+      setOpenAddCard(true);
+    } else {
+      setOpenAlertLogin(true);
+    }
+  };
+
   return (
     <div className="product_container">
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        open={openAddCard}
+        onClose={handleCloseAddCard}
+        autoHideDuration={6000}
+      >
+        <Alert
+          onClose={handleCloseAddCard}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Product is added to card!
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        open={openAlertLogin}
+        onClose={handleCloseAlertLogin}
+        autoHideDuration={6000}
+      >
+        <Alert
+          onClose={handleCloseAlertLogin}
+          severity="warning"
+          sx={{ width: "100%" }}
+        >
+          Please login to continue!
+        </Alert>
+      </Snackbar>
+
       <Header />
       <SearchBar
         searchText={searchText}
         setSearchText={setSearchText}
         submitSearch={submitSearch}
       />
-      <ProductList products={products} handleLikedClick={handleLikedClick} />
+      <ProductList
+        products={products}
+        handleLikedClick={handleLikedClick}
+        handleClickCart={handleClickCart}
+        showSearch={showSearch}
+      />
       <Footer />
     </div>
   );

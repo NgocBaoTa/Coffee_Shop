@@ -9,26 +9,15 @@ import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
 import Dialog from "@mui/material/Dialog";
 
 function ContentModal(props) {
+  const [noItem, setNoItem] = useState(1);
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    // width: "80%",
-    // height: "auto",
-    bgcolor: "white",
-    // border: "2px solid #000",
-    boxShadow: 24,
-    // p: 3,
-    overflowY: "auto",
-    // padding: "30px 20px",
-    // color: "yellow",
+  const handleOpen = () => {
+    setOpen(true);
+    setNoItem(1);
   };
+  const handleClose = () => setOpen(false);
+
   return (
-    // <div className="singleCard l-2-4 m-4 c-6 col">
     <>
       <div
         className="media"
@@ -70,18 +59,43 @@ function ContentModal(props) {
                 <hr className="modal_main--hr"></hr>
                 <div className="modal_main--group">
                   <div className="modal_main--input">
-                    <button className="main_btn--item main_btn--minus">
+                    <button
+                      className="main_btn--item main_btn--minus"
+                      onClick={() => {
+                        let value = noItem;
+                        if (value !== 1) {
+                          setNoItem(--value);
+                        }
+                      }}
+                    >
                       -
                     </button>
                     <input
                       type="number"
-                      value={1}
+                      value={noItem}
+                      onChange={(e) => setNoItem(e.target.value)}
                       className="main_btn--input"
                     />
-                    <button className="main_btn--item main_btn--plus">+</button>
+                    <button
+                      className="main_btn--item main_btn--plus"
+                      onClick={() => {
+                        let value = noItem;
+                        setNoItem(++value);
+                      }}
+                    >
+                      +
+                    </button>
                   </div>
                   <div className="modal_main--icon">
-                    <ShoppingCartCheckoutRoundedIcon className="modal_icon--item modal_main--cart" />
+                    <ShoppingCartCheckoutRoundedIcon
+                      className="modal_icon--item modal_main--cart"
+                      onClick={() => {
+                        props.handleClickCart(
+                          props.id,
+                          noItem
+                        );
+                      }}
+                    />
                     {!props.isLiked ? (
                       <FavoriteBorderRoundedIcon
                         className="modal_icon--item modal_main--love"

@@ -7,16 +7,19 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { LoginProvider } from "./context/AuthContext";
+import { AlertProvider } from "./context/AlertContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
-    <BrowserRouter>
-      <LoginProvider>
+  <BrowserRouter>
+    <LoginProvider>
+      <AlertProvider>
         <App />
-      </LoginProvider>
-    </BrowserRouter>
-  // </React.StrictMode> 
+      </AlertProvider>
+    </LoginProvider>
+  </BrowserRouter>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -59,6 +59,7 @@ function Nav() {
   const { setLogin, login } = useContext(LoginContext);
   //Drop down
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  let card = JSON.parse(localStorage.getItem("user"))?.card;
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -72,6 +73,7 @@ function Nav() {
     setLogin(false);
     // localStorage.removeItem("user");
     localStorage.clear();
+    window.location.reload();
   };
 
   const [isActive, setIsActive] = useState(false);
@@ -143,11 +145,14 @@ function Nav() {
             {login ? (
               <>
                 <div className="l-4 m-0"></div>
-                <div className="nav_right--card nav_right--item l-3 m-5">
-                  <Badge color="primary" badgeContent={100}>
+                <NavLink
+                  to="/card"
+                  className="nav_right--card nav_right--item l-3 m-5"
+                >
+                  <Badge color="primary" badgeContent={card.length}>
                     <ShoppingCartOutlinedIcon sx={{ fontSize: 26 }} />
                   </Badge>
-                </div>
+                </NavLink>
 
                 <div className="nav_right--avatar nav_right--item l-3 m-7">
                   <Box sx={{ flexGrow: 0 }}>

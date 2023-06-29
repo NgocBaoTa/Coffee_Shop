@@ -75,7 +75,7 @@ function ProductList(props) {
   return (
     <div className="grid wide">
       <div className="productList_container">
-        {props.products.length === 0 ? (
+        {props.products.length === 0 && props.showSearch ? (
           <div className="productList_notfound">Product not found!</div>
         ) : (
           props.products.map((item, index) => {
@@ -104,6 +104,7 @@ function ProductList(props) {
                 }
                 handleLikedClick={props.handleLikedClick}
                 index={index}
+                handleClickCart={props.handleClickCart}
               />
             );
           })

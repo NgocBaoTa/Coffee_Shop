@@ -12,12 +12,17 @@ function LoginProvider({ children }) {
   );
 
   const [wishlist, setWishList] = useState(
-    JSON.parse(localStorage.getItem("user"))?.wishlist
+    JSON.parse(localStorage.getItem("user"))?.wishlist || []
   );
   const [card, setCard] = useState(
-    JSON.parse(localStorage.getItem("user"))?.card
+    JSON.parse(localStorage.getItem("user"))?.card || []
   );
 
+  useEffect(() => {
+    setWishList(JSON.parse(localStorage.getItem("user"))?.wishlist);
+    setCard(JSON.parse(localStorage.getItem("user"))?.card);
+    // console.log(wishlist)
+  }, [login]);
   // console.log(wishlist);
   useEffect(() => {
     if (login) {

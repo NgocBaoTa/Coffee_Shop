@@ -22,6 +22,7 @@ function SingleCard(props) {
           handleLikedClick={props.handleLikedClick}
           id={props.id}
           index={props.index}
+          handleClickCart={props.handleClickCart}
         >
           <img className="singleCard_img" src={props.src} alt="coffee" />
           <div className="singleCard_main--name">{props.name}</div>
@@ -29,7 +30,12 @@ function SingleCard(props) {
         <div className="singleCard_main--description">
           <div className="singleCard_main--price">${props.price}</div>
           <div className="singleCard_main--icon">
-            <ShoppingCartCheckoutRoundedIcon className="singleCard_icon--cart" />
+            <ShoppingCartCheckoutRoundedIcon
+              className="singleCard_icon--cart"
+              onClick={() => {
+                props.handleClickCart(props.id, 1);
+              }}
+            />
             {props.isLiked ? (
               <FavoriteRoundedIcon
                 className="singleCard_icon--loved"

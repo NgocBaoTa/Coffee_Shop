@@ -59,7 +59,7 @@ function Nav() {
   const { setLogin, login } = useContext(LoginContext);
   //Drop down
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  let card = JSON.parse(localStorage.getItem("user"))?.card;
+  let cart = JSON.parse(localStorage.getItem("user"))?.cart;
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -146,10 +146,10 @@ function Nav() {
               <>
                 <div className="l-4 m-0"></div>
                 <NavLink
-                  to="/card"
-                  className="nav_right--card nav_right--item l-3 m-5"
+                  to="/cart"
+                  className="nav_right--cart nav_right--item l-3 m-5"
                 >
-                  <Badge color="primary" badgeContent={card.length}>
+                  <Badge color="primary" badgeContent={cart?.length}>
                     <ShoppingCartOutlinedIcon sx={{ fontSize: 26 }} />
                   </Badge>
                 </NavLink>

@@ -30,7 +30,7 @@ function Login() {
           username: data.data.customerName,
           email: data.data.customerEmail,
           wishlist: data.data.customerWishlist,
-          card: data.data.customerCard,
+          cart: data.data.customerCart,
         };
         localStorage.setItem("user", JSON.stringify(user));
         setLogin(true);

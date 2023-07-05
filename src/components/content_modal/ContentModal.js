@@ -90,10 +90,12 @@ function ContentModal(props) {
                     <ShoppingCartCheckoutRoundedIcon
                       className="modal_icon--item modal_main--cart"
                       onClick={() => {
-                        props.handleClickCart(
-                          props.id,
-                          noItem
-                        );
+                        props.handleClickCart(props.id, +noItem);
+                        if (props.setNoOfItem) {
+                          let value = props.noOfItem;
+                          value += +noItem;
+                          props.setNoOfItem(value);
+                        }
                       }}
                     />
                     {!props.isLiked ? (

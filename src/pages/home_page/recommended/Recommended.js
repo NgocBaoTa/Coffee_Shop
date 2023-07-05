@@ -11,14 +11,14 @@ import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 function Recommended() {
 
-  const [openAddCard, setOpenAddCard] = useState(false);
+  const [openAddCart, setOpenAddCart] = useState(false);
   const [openAlertLogin, setOpenAlertLogin] = useState(false);
 
-  const handleCloseAddCard = (event, reason) => {
+  const handleCloseAddCart = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-    setOpenAddCard(false);
+    setOpenAddCart(false);
   };
 
   const handleCloseAlertLogin = (event, reason) => {
@@ -27,7 +27,8 @@ function Recommended() {
     }
     setOpenAlertLogin(false);
   };
-  const { wishlist, setWishList, setCard } = useContext(LoginContext);
+
+  const { setWishList, setCart } = useContext(LoginContext);
   const [products, setProducts] = useState([]);
   let user = JSON.parse(localStorage.getItem("user"));
 
@@ -95,32 +96,32 @@ function Recommended() {
 
   const handleClickCart = (id, noItem) => {
     if (user) {
-      setCard((prevCard) => {
-        const newCard = [...prevCard];
+      setCart((prevCart) => {
+        const newCart = [...prevCart];
 
         let index = -1;
-        newCard.forEach((item, idx) => {
+        newCart.forEach((item, idx) => {
           if (item.productID === id) {
             index = idx;
             return;
           }
         });
         if (index !== -1) {
-          newCard[index].no += noItem;
+          newCart[index].no += noItem;
         } else {
           let newProduct = {};
           newProduct.productID = id;
           newProduct.no = noItem;
-          newCard.push(newProduct);
+          newCart.push(newProduct);
         }
 
-        const updatedUser = { ...user, card: newCard };
+        const updatedUser = { ...user, cart: newCart };
         localStorage.setItem("user", JSON.stringify(updatedUser));
 
-        return newCard;
+        return newCart;
       });
 
-      setOpenAddCard(true);
+      setOpenAddCart(true);
     } else {
       setOpenAlertLogin(true);
     }
@@ -130,16 +131,16 @@ function Recommended() {
     <>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        open={openAddCard}
-        onClose={handleCloseAddCard}
+        open={openAddCart}
+        onClose={handleCloseAddCart}
         autoHideDuration={6000}
       >
         <Alert
-          onClose={handleCloseAddCard}
+          onClose={handleCloseAddCart}
           severity="success"
           sx={{ width: "100%" }}
         >
-          Product is added to card!
+          Product is added to cart!
         </Alert>
       </Snackbar>
 

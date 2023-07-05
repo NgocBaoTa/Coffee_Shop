@@ -1,6 +1,7 @@
 /** @format */
-import React from "react";
+import React, { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
+import { LoginContext } from "./context/AuthContext";
 import "./assets/css/grid.css";
 import "./assets/css/base.css";
 import Home from "./pages/home_page/Home";
@@ -9,8 +10,10 @@ import Product from "./pages/product/Product";
 import About from "./pages/about_page/About";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import Cart from "./pages/cart/Cart";
 
 function App() {
+  const { login } = useContext(LoginContext);
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -19,6 +22,8 @@ function App() {
       <Route path="/about" element={<About />} />
       <Route path="/auth/login" element={<Login />} />
       <Route path="/auth/register" element={<Register />} />
+      {login ? <Route path="/cart" element={<Cart />} /> : <></>}
+      <Route path="*" element={<h2>Page not found</h2>} />
     </Routes>
   );
 }

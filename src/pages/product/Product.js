@@ -13,14 +13,15 @@ import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 
 function Product() {
-  const [openAddCard, setOpenAddCard] = useState(false);
+  // ALERT  -  start
+  const [openAddCart, setOpenAddCart] = useState(false);
   const [openAlertLogin, setOpenAlertLogin] = useState(false);
 
-  const handleCloseAddCard = (event, reason) => {
+  const handleCloseAddCart = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-    setOpenAddCard(false);
+    setOpenAddCart(false);
   };
 
   const handleCloseAlertLogin = (event, reason) => {
@@ -29,10 +30,11 @@ function Product() {
     }
     setOpenAlertLogin(false);
   };
+  // ALERT  -  end
 
-  const [showSearch, setShowSearch] = useState(false)
+  const [showSearch, setShowSearch] = useState(false);
   const [searchText, setSearchText] = useState("");
-  const {setWishList, setCard } = useContext(LoginContext);
+  const { setWishList, setCart, cart, wishlist } = useContext(LoginContext);
   const [products, setProducts] = useState([]);
   let user = JSON.parse(localStorage.getItem("user"));
 
@@ -97,6 +99,33 @@ function Product() {
     }
   };
 
+  // const handleLikedClick = (id, index) => {
+  //   if (user) {
+  //     const newWishlist = wishlist;
+  //     const newLikedProducts = [...products];
+  //     if (newLikedProducts[index].isLiked === false) {
+  //       newLikedProducts[index].isLiked = true;
+  //       newWishlist.push(id);
+  //       setWishList(newWishlist);
+  //     } else {
+  //       newLikedProducts[index].isLiked = false;
+  //       newWishlist.forEach((item, idx) => {
+  //         if (item === id) {
+  //           newWishlist.splice(idx, 1);
+  //           return;
+  //         }
+  //       });
+  //       setWishList(newWishlist);
+  //     }
+  //     const updatedUser = { ...user, wishlist: newWishlist };
+  //     localStorage.setItem("user", JSON.stringify(updatedUser));
+  //     setProducts(newLikedProducts);
+  //     console.log(newLikedProducts[index].isLiked);
+  //   } else {
+  //     console.log("create account");
+  //   }
+  // };
+
   const searchProduct = async () => {
     try {
       const data = await axios.get(
@@ -139,51 +168,81 @@ function Product() {
 
   const handleClickCart = (id, noItem) => {
     if (user) {
-      setCard((prevCard) => {
-        const newCard = [...prevCard];
+      setCart((prevCart) => {
+        const newCart = [...prevCart];
 
         let index = -1;
-        newCard.forEach((item, idx) => {
+        newCart.forEach((item, idx) => {
           if (item.productID === id) {
             index = idx;
             return;
           }
         });
         if (index !== -1) {
-          newCard[index].no += noItem;
+          newCart[index].no += noItem;
         } else {
           let newProduct = {};
           newProduct.productID = id;
           newProduct.no = noItem;
-          newCard.push(newProduct);
+          newCart.push(newProduct);
         }
 
-        const updatedUser = { ...user, card: newCard };
+        const updatedUser = { ...user, cart: newCart };
         localStorage.setItem("user", JSON.stringify(updatedUser));
 
-        return newCard;
+        return newCart;
       });
 
-      setOpenAddCard(true);
+      setOpenAddCart(true);
     } else {
       setOpenAlertLogin(true);
     }
   };
 
+  // const handleClickCart = (id, noItem) => {
+  //   if (user) {
+  //     const newCart = cart;
+
+  //     let index = -1;
+  //     newCart.forEach((item, idx) => {
+  //       if (item.productID === id) {
+  //         index = idx;
+  //         return;
+  //       }
+  //     });
+  //     if (index !== -1) {
+  //       newCart[index].no += noItem;
+  //     } else {
+  //       let newProduct = {};
+  //       newProduct.productID = id;
+  //       newProduct.no = noItem;
+  //       newCart.push(newProduct);
+  //     }
+
+  //     const updatedUser = { ...user, cart: newCart };
+  //     localStorage.setItem("user", JSON.stringify(updatedUser));
+  //     setCart([...newCart]);
+
+  //     setOpenAddCart(true);
+  //   } else {
+  //     setOpenAlertLogin(true);
+  //   }
+  // };
+
   return (
     <div className="product_container">
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        open={openAddCard}
-        onClose={handleCloseAddCard}
+        open={openAddCart}
+        onClose={handleCloseAddCart}
         autoHideDuration={6000}
       >
         <Alert
-          onClose={handleCloseAddCard}
+          onClose={handleCloseAddCart}
           severity="success"
           sx={{ width: "100%" }}
         >
-          Product is added to card!
+          Product is added to cart!
         </Alert>
       </Snackbar>
 

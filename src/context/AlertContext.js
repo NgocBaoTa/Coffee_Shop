@@ -6,14 +6,14 @@ import { createContext } from "react";
 const AlertContext = createContext();
 
 function AlertProvider({ children }) {
-  const [openAddCard, setOpenAddCard] = useState(false);
+  const [openAddCart, setOpenAddCart] = useState(false);
   const [openAlertLogin, setOpenAlertLogin] = useState(false);
 
-  const handleCloseAddCard = (event, reason) => {
+  const handleCloseAddCart = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-    setOpenAddCard(false);
+    setOpenAddCart(false);
   };
 
   const handleCloseAlertLogin = (event, reason) => {
@@ -27,11 +27,11 @@ function AlertProvider({ children }) {
     <div>
       <AlertContext.Provider
         value={{
-          openAddCard,
+          openAddCart,
           openAlertLogin,
-          handleCloseAddCard,
+          handleCloseAddCart,
           handleCloseAlertLogin,
-          setOpenAddCard,
+          setOpenAddCart,
           setOpenAlertLogin,
         }}
       >

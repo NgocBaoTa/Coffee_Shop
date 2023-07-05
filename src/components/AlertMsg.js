@@ -7,9 +7,9 @@ import { AlertContext } from "../context/AlertContext";
 
 function AlertMsg() {
   const {
-    openAddCard,
+    openAddCart,
     openAlertLogin,
-    handleCloseAddCard,
+    handleCloseAddCart,
     handleCloseAlertLogin,
   } = useContext(AlertContext);
   
@@ -17,16 +17,16 @@ function AlertMsg() {
     <>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        open={openAddCard}
-        onClose={handleCloseAddCard}
+        open={openAddCart}
+        onClose={handleCloseAddCart}
         autoHideDuration={6000}
       >
         <Alert
-          onClose={handleCloseAddCard}
+          onClose={handleCloseAddCart}
           severity="success"
           sx={{ width: "100%" }}
         >
-          Product is added to card!
+          Product is added to cart!
         </Alert>
       </Snackbar>
 

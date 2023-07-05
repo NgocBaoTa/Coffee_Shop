@@ -1,0 +1,52 @@
+/** @format */
+
+input[type="checkbox"] {
+  height: 17px;
+  width: 17px;
+}
+
+.cart_container {
+  padding-top: 10px;
+}
+
+.cart_table--header {
+  display: flex;
+  text-align-last: left;
+  background-color: var(--button-color);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-top: 20px;
+}
+
+.cart_header--item {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.cart_table--list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart_bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.cart_empty {
+  font-family: var(--normal-font);
+  font-size: 22px;
+  color: var(--black-color);
+  margin-top: 50px;
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.cart_ctn_shopping {
+  color: var(--button2-color);
+  cursor: pointer;
+}

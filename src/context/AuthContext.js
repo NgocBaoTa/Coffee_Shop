@@ -14,13 +14,13 @@ function LoginProvider({ children }) {
   const [wishlist, setWishList] = useState(
     JSON.parse(localStorage.getItem("user"))?.wishlist || []
   );
-  const [card, setCard] = useState(
-    JSON.parse(localStorage.getItem("user"))?.card || []
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("user"))?.cart || []
   );
 
   useEffect(() => {
     setWishList(JSON.parse(localStorage.getItem("user"))?.wishlist);
-    setCard(JSON.parse(localStorage.getItem("user"))?.card);
+    setCart(JSON.parse(localStorage.getItem("user"))?.cart);
     // console.log(wishlist)
   }, [login]);
   // console.log(wishlist);
@@ -31,7 +31,7 @@ function LoginProvider({ children }) {
           let data = await axios.put(
             "https://coffee-shop-ony3.onrender.com/customers",
             {
-              card,
+              cart,
               wishlist,
             },
             {
@@ -50,7 +50,7 @@ function LoginProvider({ children }) {
 
       updateData();
     }
-  }, [login, wishlist, card]);
+  }, [login, wishlist, cart]);
 
   return (
     <div>
@@ -60,8 +60,8 @@ function LoginProvider({ children }) {
           setLogin: (value) => setLogin(value),
           wishlist,
           setWishList,
-          card,
-          setCard,
+          cart,
+          setCart,
         }}
       >
         {children}

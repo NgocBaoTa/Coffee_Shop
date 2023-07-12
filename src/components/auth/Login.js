@@ -10,7 +10,7 @@ import LockSharpIcon from "@mui/icons-material/LockSharp";
 
 function Login() {
   const navigate = useNavigate();
-  const { setLogin} = useContext(LoginContext);
+  const { setLogin } = useContext(LoginContext);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [errMessage, setErrMessage] = useState("");
@@ -34,7 +34,7 @@ function Login() {
         };
         localStorage.setItem("user", JSON.stringify(user));
         setLogin(true);
-        navigate("/");
+        navigate(`/`);
       }
     } catch (e) {
       if (e.response) {
@@ -46,7 +46,8 @@ function Login() {
   };
 
   const handleSubmit = (email, password) => {
-    return axios.post("https://coffee-shop-ony3.onrender.com/cus_auth/login", {
+    // https://coffee-shop-ony3.onrender.com/cus_auth/login
+    return axios.post("http://127.0.0.1:5000/cus-auth/login", {
       email,
       password,
       type: "customer",

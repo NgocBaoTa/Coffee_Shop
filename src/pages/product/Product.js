@@ -11,26 +11,36 @@ import { LoginContext } from "../../context/AuthContext";
 
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import { AlertContext } from "../../context/AlertContext";
 
 function Product() {
   // ALERT  -  start
-  const [openAddCart, setOpenAddCart] = useState(false);
-  const [openAlertLogin, setOpenAlertLogin] = useState(false);
+  // const [openAddCart, setOpenAddCart] = useState(false);
+  // const [openAlertLogin, setOpenAlertLogin] = useState(false);
 
-  const handleCloseAddCart = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenAddCart(false);
-  };
+  // const handleCloseAddCart = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+  //   setOpenAddCart(false);
+  // };
 
-  const handleCloseAlertLogin = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenAlertLogin(false);
-  };
+  // const handleCloseAlertLogin = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+  //   setOpenAlertLogin(false);
+  // };
   // ALERT  -  end
+
+  const {
+    openAddCart,
+    openAlertLogin,
+    handleCloseAddCart,
+    handleCloseAlertLogin,
+    setOpenAlertLogin,
+    setOpenAddCart,
+  } = useContext(AlertContext);
 
   const [showSearch, setShowSearch] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -41,7 +51,8 @@ function Product() {
   const fetchData = async () => {
     try {
       let data = await axios.get(
-        "https://coffee-shop-ony3.onrender.com/products?categoryName=Product"
+        "https://127.0.0.1:5000/products"
+        // "https://coffee-shop-ony3.onrender.com/products?categoryName=Product"
       );
 
       if (user) {

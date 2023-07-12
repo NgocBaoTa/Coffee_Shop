@@ -9,24 +9,32 @@ import { LoginContext } from "../../../context/AuthContext";
 
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import { AlertContext } from "../../../context/AlertContext";
 function Recommended() {
+  // const [openAddCart, setOpenAddCart] = useState(false);
+  // const [openAlertLogin, setOpenAlertLogin] = useState(false);
 
-  const [openAddCart, setOpenAddCart] = useState(false);
-  const [openAlertLogin, setOpenAlertLogin] = useState(false);
+  // const handleCloseAddCart = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+  //   setOpenAddCart(false);
+  // };
 
-  const handleCloseAddCart = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenAddCart(false);
-  };
-
-  const handleCloseAlertLogin = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenAlertLogin(false);
-  };
+  // const handleCloseAlertLogin = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+  //   setOpenAlertLogin(false);
+  // };
+  const {
+    openAddCart,
+    openAlertLogin,
+    handleCloseAddCart,
+    handleCloseAlertLogin,
+    setOpenAlertLogin,
+    setOpenAddCart,
+  } = useContext(AlertContext);
 
   const { setWishList, setCart } = useContext(LoginContext);
   const [products, setProducts] = useState([]);
@@ -36,7 +44,9 @@ function Recommended() {
     const fetchData = async () => {
       try {
         let data = await axios.get(
-          "https://coffee-shop-ony3.onrender.com/products/recommend-products"
+          "https://localhost:5000/products/recommend-products"
+
+          // "https://coffee-shop-ony3.onrender.com/products/recommend-products"
         );
 
         if (user) {

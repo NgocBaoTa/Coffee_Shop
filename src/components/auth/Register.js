@@ -18,7 +18,8 @@ const Register = () => {
 
   const handleSubmit = (username, email, password) => {
     return axios.post(
-      "https://coffee-shop-ony3.onrender.com/cus_auth/register",
+      "http://127.0.0.1:5000/cus-auth/register",
+      // "https://coffee-shop-ony3.onrender.com/cus_auth/register",
       {
         username,
         email,

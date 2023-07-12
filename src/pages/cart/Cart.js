@@ -43,7 +43,8 @@ function Cart() {
   const fetchData = async () => {
     try {
       let data = await axios.get(
-        "https://coffee-shop-ony3.onrender.com/products?categoryName=Product"
+        "https://localhost:5000/products?categoryName=Product"
+        // "https://coffee-shop-ony3.onrender.com/products?categoryName=Product"
       );
 
       let productArr = [];
@@ -103,11 +104,6 @@ function Cart() {
   useEffect(() => {
     fetchData();
   }, [cart]);
-
-  useEffect(() => {
-    console.log("products: ", products);
-    console.log("chosen products: ", chosenProduct);
-  }, [chosenProduct]);
 
   const handleChangeCart = (id, noItem) => {
     setCart((prevCart) => {

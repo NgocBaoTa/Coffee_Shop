@@ -11,6 +11,7 @@ import About from "./pages/about_page/About";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Cart from "./pages/cart/Cart";
+import Profile from "./pages/profile/Profile";
 
 function App() {
   const { login } = useContext(LoginContext);
@@ -23,6 +24,7 @@ function App() {
       <Route path="/auth/login" element={<Login />} />
       <Route path="/auth/register" element={<Register />} />
       {login ? <Route path="/cart" element={<Cart />} /> : <></>}
+      {login ? <Route path="/profile" element={<Profile/>} /> : <></>}
       <Route path="*" element={<h2>Page not found</h2>} />
     </Routes>
   );

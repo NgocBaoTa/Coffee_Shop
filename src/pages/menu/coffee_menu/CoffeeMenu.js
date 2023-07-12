@@ -11,7 +11,9 @@ function CoffeeMenu() {
     const fetchData = async () => {
       try {
         let data = await axios.get(
-          "https://coffee-shop-ony3.onrender.com/products?categoryName=Coffee"
+          "https://localhost:5000/products?categoryName=Coffee"
+
+          // "https://coffee-shop-ony3.onrender.com/products?categoryName=Coffee"
         );
 
         setProducts(data.data);
@@ -21,7 +23,6 @@ function CoffeeMenu() {
     };
     fetchData();
   }, []);
-
 
   return (
     <div className="coffee_menu_container grid wide">

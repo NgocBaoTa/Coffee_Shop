@@ -12,7 +12,7 @@ function Pastry() {
     const fetchData = async () => {
       try {
         let data = await axios.get(
-          "https://localhost:5000/products?categoryName=Patries"
+          "/products?categoryName=Patries"
 
           // "https://coffee-shop-ony3.onrender.com/products?categoryName=Patries"
         );

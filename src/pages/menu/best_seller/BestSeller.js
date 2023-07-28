@@ -12,7 +12,7 @@ function BestSeller() {
     const fetchData = async () => {
       try {
         let data = await axios.get(
-          "https://localhost:5000/products/best-seller"
+          "/products/best-seller"
 
           // "https://coffee-shop-ony3.onrender.com/products/best-seller"
         );

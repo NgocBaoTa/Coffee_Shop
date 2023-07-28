@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState, useEffect, useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./nav.css";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
@@ -56,6 +56,7 @@ const theme = createTheme({
 });
 
 function Nav() {
+  const navigate = useNavigate();
   const { setLogin, login } = useContext(LoginContext);
   //Drop down
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -71,8 +72,15 @@ function Nav() {
 
   const handleLogout = () => {
     setLogin(false);
-    // localStorage.removeItem("user");
     localStorage.clear();
+    if (
+      window.location.pathname === "/cart" ||
+      window.location.pathname === "/wishlist" ||
+      window.location.pathname === "/orders" || 
+      window.location.pathname === "/checkout"
+    ) {
+      navigate("/");
+    }
     window.location.reload();
   };
 
@@ -92,11 +100,13 @@ function Nav() {
         <NavLink to="/" className="nav_logo l-2 c-10 m-3">
           <div className="nav_logo--name">Bean Coffee</div>
         </NavLink>
-        <div className="l-2"></div>
+        <div className="l-2 m-0 c-0"></div>
 
         <div className="nav_button c-2">
           {isActive ? (
-            <CloseRoundedIcon onClick={changeActiveMenu} />
+            <div className="nav_button--close">
+              <CloseRoundedIcon onClick={changeActiveMenu} />
+            </div>
           ) : (
             <MenuRoundedIcon onClick={changeActiveMenu} />
           )}
@@ -139,67 +149,121 @@ function Nav() {
           </div>
 
           <div className="l-1"></div>
+          <hr className="nav_line" />
 
           <div className="nav_right l-5 m-4">
             <div className="l-2 m-0"></div>
             {login ? (
               <>
-                <div className="l-4 m-0"></div>
+                <div className="l-4 m-0 c-0"></div>
                 <NavLink
                   to="/cart"
                   className="nav_right--cart nav_right--item l-3 m-5"
                 >
-                  <Badge color="primary" badgeContent={cart?.length}>
-                    <ShoppingCartOutlinedIcon sx={{ fontSize: 26 }} />
-                  </Badge>
+                  <div className="nav_cart--icon">
+                    <Badge color="primary" badgeContent={cart?.length}>
+                      <ShoppingCartOutlinedIcon sx={{ fontSize: 26 }} />
+                    </Badge>
+                  </div>
+
+                  <div
+                    className={`nav_cart--text nav_right--item ${
+                      path === "/cart" ? "active" : ""
+                    }`}
+                  >
+                    Cart
+                  </div>
                 </NavLink>
 
                 <div className="nav_right--avatar nav_right--item l-3 m-7">
-                  <Box sx={{ flexGrow: 0 }}>
-                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                      <Stack direction="row" spacing={2}>
-                        <Avatar
-                          {...stringAvatar(
-                            JSON.parse(localStorage.getItem("user")).username
-                          )}
-                          sx={{ width: 35, height: 35 }}
-                        />
-                      </Stack>
-                    </IconButton>
-                    <Menu
-                      sx={{ mt: "40px" }}
-                      id="menu-appbar"
-                      anchorEl={anchorElUser}
-                      anchorOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                      }}
-                      open={Boolean(anchorElUser)}
-                      onClose={handleCloseUserMenu}
+                  <div className="nav_right--icon">
+                    <Box sx={{ flexGrow: 0 }}>
+                      <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                        <Stack direction="row" spacing={2}>
+                          <Avatar
+                            {...stringAvatar(
+                              JSON.parse(localStorage.getItem("user")).username
+                            )}
+                            sx={{ width: 35, height: 35 }}
+                          />
+                        </Stack>
+                      </IconButton>
+                      <Menu
+                        sx={{ mt: "40px" }}
+                        id="menu-appbar"
+                        anchorEl={anchorElUser}
+                        anchorOrigin={{
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                        open={Boolean(anchorElUser)}
+                        onClose={handleCloseUserMenu}
+                      >
+                        <MenuItem onClick={handleCloseUserMenu}>
+                          <Typography textAlign="center">
+                            <NavLink
+                              to="/wishlist"
+                              className="nav_right--profile"
+                            >
+                              Wishlist
+                            </NavLink>
+                          </Typography>
+                        </MenuItem>
+                        <MenuItem onClick={handleCloseUserMenu}>
+                          <Typography textAlign="center">
+                            <NavLink
+                              to="/orders"
+                              className="nav_right--profile"
+                            >
+                              Orders
+                            </NavLink>
+                          </Typography>
+                        </MenuItem>
+                        <MenuItem onClick={handleCloseUserMenu}>
+                          <Typography
+                            textAlign="center"
+                            onClick={handleLogout}
+                            className="nav_right--logout"
+                          >
+                            Logout
+                          </Typography>
+                        </MenuItem>
+                      </Menu>
+                    </Box>
+                  </div>
+
+                  <div className="nav_right--text">
+                    <NavLink
+                      to="/wishlist"
+                      className={`nav_right--item ${
+                        path === "/wishlist" ? "active" : ""
+                      }`}
                     >
-                      <MenuItem onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">
-                          <NavLink to="/profile" className="nav_right--profile">
-                            Profile
-                          </NavLink>
-                        </Typography>
-                      </MenuItem>
-                      <MenuItem onClick={handleCloseUserMenu}>
-                        <Typography
-                          textAlign="center"
-                          onClick={handleLogout}
-                          className="nav_right--logout"
-                        >
-                          Logout
-                        </Typography>
-                      </MenuItem>
-                    </Menu>
-                  </Box>
+                      Wishlist
+                    </NavLink>
+
+                    <NavLink
+                      to="/orders"
+                      className={`nav_right--item ${
+                        path === "/orders" ? "active" : ""
+                      }`}
+                    >
+                      Orders
+                    </NavLink>
+
+                    <div
+                      textAlign="center"
+                      onClick={handleLogout}
+                      className="nav_right--logout nav_right--item"
+                    >
+                      Logout
+                    </div>
+                  </div>
                 </div>
               </>
             ) : (
@@ -214,7 +278,7 @@ function Nav() {
                   to="/auth/register"
                   className="nav_right--signup nav_right--item l-6 m-7"
                 >
-                  <button>Sign Up</button>
+                  Sign Up
                 </NavLink>
               </>
             )}

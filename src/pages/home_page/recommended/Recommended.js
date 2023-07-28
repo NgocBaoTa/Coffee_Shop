@@ -44,7 +44,7 @@ function Recommended() {
     const fetchData = async () => {
       try {
         let data = await axios.get(
-          "https://localhost:5000/products/recommend-products"
+          "/products/recommend-products"
 
           // "https://coffee-shop-ony3.onrender.com/products/recommend-products"
         );

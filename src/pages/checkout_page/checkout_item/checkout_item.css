@@ -1,0 +1,9 @@
+.checkout_item--container {
+    display: flex;
+    align-items: center;
+}
+
+.checkout_item--quantity {
+    display: flex;
+    justify-content: center;
+}

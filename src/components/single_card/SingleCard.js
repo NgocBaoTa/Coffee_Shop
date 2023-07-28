@@ -9,7 +9,7 @@ import ContentModal from "../content_modal/ContentModal";
 
 function SingleCard(props) {
   return (
-    <div className=" l-2-4 m-4 c-6 c-2-6 col">
+    <div data={props.id} className=" l-2-4 m-4 c-6 c-2-6 col">
       <div className="singleCard_container">
         <ContentModal
           src={props.src}

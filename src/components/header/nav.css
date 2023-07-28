@@ -4,6 +4,7 @@
   font-family: var(--normal-font);
   display: flex;
   padding-top: 10px;
+  align-items: center;
 }
 
 .nav_container a {
@@ -94,9 +95,14 @@
   color: var(--black-color);
 }
 
-.nav_right--logout:hover,
 .nav_right--profile:hover {
   color: var(--button2-color);
+}
+
+.nav_cart--text,
+.nav_right--text,
+.nav_line {
+  display: none;
 }
 
 @media (max-width: 740px) {
@@ -106,25 +112,26 @@
     flex-direction: column;
     background-color: black;
     height: auto;
-    width: 100%;
-    margin-top: -10px;
-    margin-left: -15px;
-    padding-top: 20px;
-    padding-bottom: 15px;
-    padding-left: 20px;
+    width: 50%;
+    max-width: 300px;
+    right: 0;
+    height: 100%;
+    top: 0;
     font-size: 16px;
-    transform: translate(0%);
-    transition: transform linear 0.5s;
+    padding-top: 50px;
+    z-index: 1000;
   }
 
   .nav_container {
     z-index: 1;
   }
+
   .nav_main.active .nav_center,
   .nav_main.active .nav_right {
     display: flex;
     flex-direction: column;
     text-align: center;
+    gap: 5px;
   }
 
   .nav_main.active .nav_right--signup {
@@ -134,6 +141,7 @@
   .nav_main.active .nav_right--item,
   .nav_main.active .nav_center--item {
     padding-bottom: 4px;
+    cursor: pointer;
   }
 
   .nav_main.active .nav_right--signup button {
@@ -148,6 +156,50 @@
     color: #fff;
     cursor: pointer;
     font-size: 20px;
-    z-index: 10;
+  }
+
+  .nav_cart--text,
+  .nav_right--text,
+  .nav_line {
+    display: block;
+  }
+
+  .nav_line {
+    width: 70%;
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+
+  .nav_cart--text {
+    margin-bottom: 8px;
+  }
+
+  .nav_right--text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .nav_cart--icon,
+  .nav_right--icon {
+    display: none;
+  }
+
+  .nav_button--close {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    z-index: 1001;
+  }
+
+  .nav_right--item.active {
+    color: var(--button-color);
+  }
+}
+
+@media (max-width: 530px) {
+  .nav_main.active {
+    width: 70%;
+    max-width: 300px;
   }
 }

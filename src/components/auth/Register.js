@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import PersonIcon from "@mui/icons-material/Person";
@@ -18,12 +18,17 @@ const Register = () => {
 
   const handleSubmit = (username, email, password) => {
     return axios.post(
-      "http://127.0.0.1:5000/cus-auth/register",
+      "/cus-auth/register",
       // "https://coffee-shop-ony3.onrender.com/cus_auth/register",
       {
         username,
         email,
         password,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     );
   };
@@ -63,6 +68,20 @@ const Register = () => {
   const goHomePage = (e) => {
     navigate("/");
   };
+
+   useEffect(() => {
+     const handleKeyDown = (event) => {
+       if (event.keyCode === 13) {
+         handleRegister(event);
+       }
+     };
+
+     window.addEventListener("keydown", handleKeyDown);
+
+     return () => {
+       window.removeEventListener("keydown", handleKeyDown);
+     };
+   }, [username, email, password]);
 
   return (
     <div className="register_page--bg">

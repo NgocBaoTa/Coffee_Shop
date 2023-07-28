@@ -11,7 +11,7 @@ function CoffeeMenu() {
     const fetchData = async () => {
       try {
         let data = await axios.get(
-          "https://localhost:5000/products?categoryName=Coffee"
+          "/products?categoryName=Coffee"
 
           // "https://coffee-shop-ony3.onrender.com/products?categoryName=Coffee"
         );

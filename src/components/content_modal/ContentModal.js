@@ -161,7 +161,7 @@ function ContentModal(props) {
                     <li className="modal_details--item">
                       Future orders can be modified or cancelled at any point.
                     </li> */}
-                    {props.details.map((item, index) => {
+                    {props.details?.map((item, index) => {
                       return (
                         <li key={index} className="modal_details--item">
                           {item}

@@ -43,7 +43,7 @@ function Cart() {
   const fetchData = async () => {
     try {
       let data = await axios.get(
-        "https://localhost:5000/products?categoryName=Product"
+        "/products?categoryName=Product"
         // "https://coffee-shop-ony3.onrender.com/products?categoryName=Product"
       );
 
@@ -199,7 +199,6 @@ function Cart() {
   };
 
   // Handle click CHECKBOX  -  START
-
   const handleChooseAll = (e) => {
     setChosenAll(e.target.checked);
 
@@ -242,6 +241,7 @@ function Cart() {
     }
   };
   // Handle click CHECKBOX  -  END
+
 
   // Add space at the bottom  -  START
   const elRef = useRef();
@@ -289,6 +289,7 @@ function Cart() {
         </Snackbar>
 
         <Header />
+        
         <div className="cart_container grid wide">
           <div className="cart_table--header">
             <input

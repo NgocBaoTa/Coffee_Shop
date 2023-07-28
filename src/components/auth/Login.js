@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -10,7 +10,7 @@ import LockSharpIcon from "@mui/icons-material/LockSharp";
 
 function Login() {
   const navigate = useNavigate();
-  const { setLogin } = useContext(LoginContext);
+  const { setLogin, setUserID } = useContext(LoginContext);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [errMessage, setErrMessage] = useState("");
@@ -21,18 +21,22 @@ function Login() {
 
     try {
       const data = await handleSubmit(email, password);
-      if (data.data && data.data.success !== true) {
-        setErrMessage(data.data.message);
+      let customerData = data.data;
+      if (customerData && customerData.success !== true) {
+        setErrMessage(customerData.message);
       } else {
-        // console.log("DATA", data.data);
+        customerData = data.data.customer;
         let user = {
-          user_token: data.data.accessToken,
-          username: data.data.customerName,
-          email: data.data.customerEmail,
-          wishlist: data.data.customerWishlist,
-          cart: data.data.customerCart,
+          // user_token: customerData.accessToken,
+          username: customerData.username,
+          // email: customerData.email,
+          wishlist: customerData.wishlist,
+          cart: customerData.cart,
+          boughtProduct: customerData.boughtProduct,
+          checkoutProduct: []
         };
         localStorage.setItem("user", JSON.stringify(user));
+        setUserID(customerData._id);
         setLogin(true);
         navigate(`/`);
       }
@@ -47,11 +51,19 @@ function Login() {
 
   const handleSubmit = (email, password) => {
     // https://coffee-shop-ony3.onrender.com/cus_auth/login
-    return axios.post("http://127.0.0.1:5000/cus-auth/login", {
-      email,
-      password,
-      type: "customer",
-    });
+    return axios.post(
+      "/cus-auth/login",
+      {
+        email,
+        password,
+        type: "customer",
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
   };
 
   const clickSignup = (e) => {
@@ -61,6 +73,20 @@ function Login() {
   const goHomePage = (e) => {
     navigate("/");
   };
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.keyCode === 13) {
+        handleLogin(event);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [email, password]);
 
   return (
     <div className="login_page--bg">

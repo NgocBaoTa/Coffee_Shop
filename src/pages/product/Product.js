@@ -51,7 +51,7 @@ function Product() {
   const fetchData = async () => {
     try {
       let data = await axios.get(
-        "https://127.0.0.1:5000/products"
+        "/products?categoryName=Product"
         // "https://coffee-shop-ony3.onrender.com/products?categoryName=Product"
       );
 
@@ -140,8 +140,10 @@ function Product() {
   const searchProduct = async () => {
     try {
       const data = await axios.get(
-        `https://coffee-shop-ony3.onrender.com/products/search?searchText=${searchText}`
+        `/products/search?searchText=${searchText}`
+        // `https://coffee-shop-ony3.onrender.com/products/search?searchText=${searchText}`
       );
+      console.log(searchText);
 
       if (user) {
         let productArr = data.data;

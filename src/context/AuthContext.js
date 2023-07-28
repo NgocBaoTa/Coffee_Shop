@@ -18,6 +18,8 @@ function LoginProvider({ children }) {
     JSON.parse(localStorage.getItem("user"))?.cart || []
   );
 
+  const [userID, setUserID] = useState("");
+
   useEffect(() => {
     setWishList(JSON.parse(localStorage.getItem("user"))?.wishlist);
     setCart(JSON.parse(localStorage.getItem("user"))?.cart);
@@ -25,26 +27,27 @@ function LoginProvider({ children }) {
   }, [login]);
   // console.log(wishlist);
   useEffect(() => {
-    if (login) {
+    if (login && userID.length > 0) {
       const updateData = async () => {
         try {
           let data = await axios.put(
-            "https://coffee-shop-ony3.onrender.com/customers",
+            `/customers/${userID}`,
+            // "https://coffee-shop-ony3.onrender.com/customers",
             {
               cart,
               wishlist,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${
-                  JSON.parse(localStorage.getItem("user")).user_token
-                }`,
-              },
             }
+            // {
+            //   headers: {
+            //     Authorization: `Bearer ${
+            //       JSON.parse(localStorage.getItem("user")).user_token
+            //     }`,
+            //   },
+            // }
           );
-          // console.log(data);
+          console.log("DATA: ", data)
         } catch (error) {
-          console.log(error.message);
+          console.log(error);
         }
       };
 
@@ -62,6 +65,8 @@ function LoginProvider({ children }) {
           setWishList,
           cart,
           setCart,
+          userID,
+          setUserID,
         }}
       >
         {children}

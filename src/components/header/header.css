@@ -2,6 +2,7 @@
 
 .header_img {
   background-image: url("../../assets/img/coffee_image.png");
+  /* background: black; */
   width: 100vw;
   height: 600px;
   background-position: center;

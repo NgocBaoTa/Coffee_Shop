@@ -257,7 +257,7 @@ function Nav() {
                     </NavLink>
 
                     <div
-                      textAlign="center"
+                      textalign="center"
                       onClick={handleLogout}
                       className="nav_right--logout nav_right--item"
                     >

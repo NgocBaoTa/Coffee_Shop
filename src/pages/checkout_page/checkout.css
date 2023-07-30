@@ -54,6 +54,8 @@
   padding-left: 8px;
 }
 
+.checkout_payment--cardNumber::-webkit-outer-spin-button,
+.checkout_payment--cardNumber::-webkit-inner-spin-button,
 .checkout_shipping--phone::-webkit-outer-spin-button,
 .checkout_shipping--phone::-webkit-inner-spin-button {
   display: none;
@@ -134,7 +136,8 @@
   cursor: pointer;
 }
 
-
 .invalid {
-  border: 1px solid red;
+  border: 1.2px solid rgba(255, 0, 0, 0.8);
+ box-shadow: 0 0 4px rgba(255, 0, 0, 0.3);
+ transition: border-color 0.3s ease, box-shadow 0.2s ease;
 }

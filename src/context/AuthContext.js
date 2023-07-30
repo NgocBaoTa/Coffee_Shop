@@ -18,7 +18,9 @@ function LoginProvider({ children }) {
     JSON.parse(localStorage.getItem("user"))?.cart || []
   );
 
-  const [userID, setUserID] = useState("");
+  const [userID, setUserID] = useState(
+    JSON.parse(localStorage.getItem("user"))?.userID
+  );
 
   useEffect(() => {
     setWishList(JSON.parse(localStorage.getItem("user"))?.wishlist);
@@ -27,7 +29,8 @@ function LoginProvider({ children }) {
   }, [login]);
   // console.log(wishlist);
   useEffect(() => {
-    if (login && userID.length > 0) {
+    // if (login && userID.length > 0) {
+    if (login && userID.length > 0) {    
       const updateData = async () => {
         try {
           let data = await axios.put(
@@ -45,7 +48,7 @@ function LoginProvider({ children }) {
             //   },
             // }
           );
-          console.log("DATA: ", data)
+          // console.log("DATA: ", data)
         } catch (error) {
           console.log(error);
         }

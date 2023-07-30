@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import "./checkout.css";
 import Nav from "../../components/header/Nav";
 import CheckoutItem from "./checkout_item/CheckoutItem";
@@ -8,8 +8,9 @@ import axios from "axios";
 import { LoginContext } from "../../context/AuthContext";
 
 function Checkout() {
-  const { userID } = useContext(LoginContext);
+  const { userID, cart, setCart } = useContext(LoginContext);
   const [invalidFields, setInvalidFields] = useState([]);
+  let user = JSON.parse(localStorage.getItem("user"));
 
   const [shippingInfo, setShippingInfo] = useState({
     name: "",
@@ -27,19 +28,19 @@ function Checkout() {
 
   const checkValidation = () => {
     let invalidField = [];
-    if (shippingInfo.name.length === 0) invalidFields.push("name");
-    if (shippingInfo.address.length === 0) invalidFields.push("address");
+    if (shippingInfo.name.length === 0) invalidField.push("name");
+    if (shippingInfo.address.length === 0) invalidField.push("address");
     if (
       !/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(
         shippingInfo.phone
       )
     )
-      invalidFields.push("phone");
-    if (paymentInfo.cardHolder.length === 0) invalidFields.push("cardHolder");
-    if (paymentInfo.method.length === 0) invalidFields.push("method");
-    if (paymentInfo.cardNumber.length !== 19) invalidFields.push("cardNumber");
+      invalidField.push("phone");
+    if (paymentInfo.cardHolder.length === 0) invalidField.push("cardHolder");
+    if (paymentInfo.method.length === 0) invalidField.push("method");
+    if (paymentInfo.cardNumber.length !== 19) invalidField.push("cardNumber");
     if (paymentInfo.cvc.length !== 3 || typeof +paymentInfo.cvc !== "number")
-      invalidFields.push("cvc");
+      invalidField.push("cvc");
     if (paymentInfo.expireDate.length !== 0) {
       const [month, year] = paymentInfo.expireDate.split("/");
       const currentYear = new Date().getFullYear() % 100;
@@ -47,19 +48,16 @@ function Checkout() {
       const isMonthValid = /^[01]\d$/.test(month);
       const isYearValid =
         /^\d\d$/.test(year) && parseInt(year, 10) >= currentYear;
-
       let isValid = isMonthValid && isYearValid;
-      if (!isValid) invalidFields.push("expireDate");
+      if (!isValid) invalidField.push("expireDate");
     } else {
-      invalidFields.push("expireDate");
+      invalidField.push("expireDate");
     }
 
     return invalidField;
   };
 
-  let checkoutProducts = JSON.parse(
-    localStorage.getItem("user")
-  ).checkoutProduct;
+  let checkoutProducts = user.checkoutProduct;
 
   let products = checkoutProducts.map(({ id, noOfItems }) => ({
     id,
@@ -73,18 +71,11 @@ function Checkout() {
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
 
+    setInvalidFields(() => checkValidation());
     try {
-      setInvalidFields(checkValidation());
-      console.log("Invalid fields: ", invalidFields);
-      if (invalidFields.length !== 0) {
-        invalidFields.forEach((field) => {
-          document
-            .querySelector(`input[name=${field}]`)
-            .classList.add("invalid");
-        });
-      } else {
+      if (checkValidation().length === 0) {
         const data = await axios.post("/orders", {
-          customerID: userID,
+          customerID: user.userID,
           orderProducts: products,
           orderAddress: shippingInfo.address,
           orderPhone: +shippingInfo.phone,
@@ -96,7 +87,13 @@ function Checkout() {
           orderSubtotal: subtotal,
         });
 
-        console.log("DATA: ", data.data);
+        const updatedCart = cart.filter(
+          (item) => !products.some((product) => product.id === item.productID)
+        );
+
+        setCart(updatedCart);
+        const updatedUser = { ...user, checkoutProduct: [], cart: updatedCart };
+        localStorage.setItem("user", JSON.stringify(updatedUser));
       }
     } catch (e) {
       if (e.response) {
@@ -106,10 +103,6 @@ function Checkout() {
       }
     }
   };
-
-  useEffect(() => {
-    console.log("fields: ", invalidFields);
-  }, [invalidFields]);
 
   return (
     <>
@@ -145,15 +138,14 @@ function Checkout() {
                           ...shippingInfo,
                           name: e.target.value.trim(),
                         });
-                        console.log("test: ", invalidFields);
                         if (invalidFields.includes("name")) {
-                          // let newArr = invalidFields.filter(
-                          //   (field) => field !== "name"
-                          // );
-                          // invalidFields = newArr;
-                          // document
-                          //   .querySelector('input[name="name"]')
-                          //   .classList.remove("invalid");
+                          let newArr = invalidFields.filter(
+                            (field) => field !== "name"
+                          );
+                          setInvalidFields(newArr);
+                          document
+                            .querySelector('input[name="name"]')
+                            .classList.remove("invalid");
                         }
                       }}
                     />
@@ -176,12 +168,11 @@ function Checkout() {
                           ...shippingInfo,
                           phone: e.target.value.trim(),
                         });
-                        console.log(invalidFields);
                         if (invalidFields.includes("phone")) {
                           let newArr = invalidFields.filter(
                             (field) => field !== "phone"
                           );
-                          invalidFields = newArr;
+                          setInvalidFields(newArr);
                           document
                             .querySelector('input[name="phone"]')
                             .classList.remove("invalid");
@@ -208,9 +199,10 @@ function Checkout() {
                           address: e.target.value.trim(),
                         });
                         if (invalidFields.includes("address")) {
-                          invalidFields = invalidFields.filter(
+                          let newArr = invalidFields.filter(
                             (field) => field !== "address"
                           );
+                          setInvalidFields(newArr);
                           document
                             .querySelector('input[name="address"]')
                             .classList.remove("invalid");
@@ -241,7 +233,7 @@ function Checkout() {
                           });
                         }}
                       />
-                      <label for="checkout_debit_card">Debit card</label>
+                      <label htmlFor="checkout_debit_card">Debit card</label>
                     </div>
 
                     <div className="checkout_payment--radio">
@@ -257,9 +249,10 @@ function Checkout() {
                           });
                         }}
                       />
-                      <label for="checkout_credit_card">Credit card</label>
+                      <label htmlFor="checkout_credit_card">Credit card</label>
                     </div>
                   </div>
+
                   <div className="checkout_payment--item">
                     <label className="checkout_payment--label">
                       Cardholder
@@ -280,9 +273,10 @@ function Checkout() {
                           cardHolder: e.target.value.trim(),
                         });
                         if (invalidFields.includes("cardHolder")) {
-                          invalidFields = invalidFields.filter(
+                          let newArr = invalidFields.filter(
                             (field) => field !== "cardHolder"
                           );
+                          setInvalidFields(newArr);
                           document
                             .querySelector('input[name="cardHolder"]')
                             .classList.remove("invalid");
@@ -297,11 +291,11 @@ function Checkout() {
                     </label>
                     <input
                       required
-                      type="text"
+                      type="number"
                       className={
                         invalidFields.includes("cardNumber")
-                          ? "invalid checkout_payment--input"
-                          : "checkout_payment--input"
+                          ? "invalid checkout_payment--input checkout_payment--cardNumber"
+                          : "checkout_payment--input checkout_payment--cardNumber"
                       }
                       value={paymentInfo.cardNumber}
                       name="cardNumber"
@@ -311,9 +305,10 @@ function Checkout() {
                           cardNumber: e.target.value.trim(),
                         });
                         if (invalidFields.includes("cardNumber")) {
-                          invalidFields = invalidFields.filter(
+                          let newArr = invalidFields.filter(
                             (field) => field !== "cardNumber"
                           );
+                          setInvalidFields(newArr);
                           document
                             .querySelector('input[name="cardNumber"]')
                             .classList.remove("invalid");
@@ -354,9 +349,10 @@ function Checkout() {
                             expireDate: formattedExpiry,
                           });
                           if (invalidFields.includes("expireDate")) {
-                            invalidFields = invalidFields.filter(
+                            let newArr = invalidFields.filter(
                               (field) => field !== "expireDate"
                             );
+                            setInvalidFields(newArr);
                             document
                               .querySelector('input[name="expireDate"]')
                               .classList.remove("invalid");
@@ -364,6 +360,7 @@ function Checkout() {
                         }}
                       />
                     </div>
+
                     <div className="checkout_payment--item">
                       <label className="checkout_payment--label">CVC</label>
                       <input
@@ -383,9 +380,10 @@ function Checkout() {
                             cvc: e.target.value,
                           });
                           if (invalidFields.includes("cvc")) {
-                            invalidFields = invalidFields.filter(
+                            let newArr = invalidFields.filter(
                               (field) => field !== "cvc"
                             );
+                            setInvalidFields(newArr);
                             document
                               .querySelector('input[name="cvc"]')
                               .classList.remove("invalid");

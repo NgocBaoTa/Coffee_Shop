@@ -27,6 +27,7 @@ function Login() {
       } else {
         customerData = data.data.customer;
         let user = {
+          userID: customerData._id,
           // user_token: customerData.accessToken,
           username: customerData.username,
           // email: customerData.email,

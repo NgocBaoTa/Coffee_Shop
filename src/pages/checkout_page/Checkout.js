@@ -2,12 +2,14 @@
 
 import React, { useState, useContext } from "react";
 import "./checkout.css";
+import { useNavigate } from "react-router-dom";
 import Nav from "../../components/header/Nav";
 import CheckoutItem from "./checkout_item/CheckoutItem";
 import axios from "axios";
 import { LoginContext } from "../../context/AuthContext";
 
 function Checkout() {
+  const navigate = useNavigate();
   const { userID, cart, setCart } = useContext(LoginContext);
   const [invalidFields, setInvalidFields] = useState([]);
   let user = JSON.parse(localStorage.getItem("user"));
@@ -94,6 +96,9 @@ function Checkout() {
         setCart(updatedCart);
         const updatedUser = { ...user, checkoutProduct: [], cart: updatedCart };
         localStorage.setItem("user", JSON.stringify(updatedUser));
+        document.querySelector(".checkout_shipping--form").reset();
+        document.querySelector(".checkout_payment--form").reset();
+        navigate("/");
       }
     } catch (e) {
       if (e.response) {
@@ -112,7 +117,7 @@ function Checkout() {
       <div className="checkout_container grid wide">
         <div className="checkout_heading">Checkout</div>
         <div className="checkout_main">
-          <div className="l-5">
+          <div className="l-5 m-12 c-12">
             <div className="checkout_main--left col">
               <div className="checkout_shipping--info">
                 <div className="checkout_shipping--heading">
@@ -397,17 +402,21 @@ function Checkout() {
             </div>
           </div>
 
-          <div className="l-7">
+          <div className="l-7 m-12 c-12">
             <div className="checkout_main--right col">
               <div className="checkout_product--info">
                 <div className="checkout_product--heading">Products</div>
                 <div className="checkout_product--header">
-                  <div className="checkout_header--image col l-2-4"></div>
-                  <div className="checkout_header--name col l-5-4">Product</div>
-                  <div className="checkout_product--quantity col l-2">
+                  <div className="checkout_header--image col l-2-4 m-2"></div>
+                  <div className="checkout_header--name col l-5-4 m-5-5">
+                    Product
+                  </div>
+                  <div className="checkout_product--quantity col l-2 m-2 c-0">
                     Quantity
                   </div>
-                  <div className="checkout_product--price col l-2">Price</div>
+                  <div className="checkout_product--price col l-2 m-2 c-0">
+                    Price
+                  </div>
                 </div>
                 <hr />
                 <div className="checkout_product--list">
@@ -426,27 +435,29 @@ function Checkout() {
               </div>
 
               <div className="checkout_summary--info">
-                <div className="checkout_summary--space col l-8"></div>
-                <div className="checkout_summary--main col l-4">
+                <div className="checkout_summary--space col l-8 m-8 c-5"></div>
+                <div className="checkout_summary--main col l-4 m-4 c-7">
                   <div className="checkout_summary--subtotal checkout_summary--item">
-                    <span className="checkout_summary--text col l-5">
+                    <span className="checkout_summary--text col l-5 m-5 c-5">
                       Subtotal
                     </span>
-                    <span className="checkout_summary--value col l-7">
+                    <span className="checkout_summary--value col l-7 m-7 c-7">
                       : &nbsp; $ {subtotal.toFixed(2)}
                     </span>
                   </div>
                   <div className="checkout_summary--tax checkout_summary--item">
-                    <span className="checkout_summary--text col l-5">Tax</span>
-                    <span className="checkout_summary--value col l-7">
+                    <span className="checkout_summary--text col l-5 m-5 c-5">
+                      Tax
+                    </span>
+                    <span className="checkout_summary--value col l-7 m-7 c-7">
                       : &nbsp; $ {(subtotal * 0.13).toFixed(2)}
                     </span>
                   </div>
                   <div className="checkout_summary--total checkout_summary--item">
-                    <span className="checkout_summary--text col l-5">
+                    <span className="checkout_summary--text col l-5 m-5 c-5">
                       Total
                     </span>
-                    <span className="checkout_summary--value col l-7">
+                    <span className="checkout_summary--value col l-7 m-7 c-7">
                       : &nbsp; $ {(subtotal * 1.13).toFixed(2)}
                     </span>
                   </div>

@@ -7,7 +7,7 @@
 
 .checkout_container {
   font-family: var(--normal-font);
-  margin-bottom: 100px;
+  padding-bottom: 100px;
 }
 
 .checkout_heading {
@@ -112,6 +112,7 @@
 
 .checkout_summary--info {
   display: flex;
+  justify-content: space-between;
 }
 
 .checkout_summary--item {
@@ -138,6 +139,104 @@
 
 .invalid {
   border: 1.2px solid rgba(255, 0, 0, 0.8);
- box-shadow: 0 0 4px rgba(255, 0, 0, 0.3);
- transition: border-color 0.3s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 4px rgba(255, 0, 0, 0.3);
+  transition: border-color 0.3s ease, box-shadow 0.2s ease;
+}
+
+@media (min-width: 740px) and (max-width: 1023px) {
+  .checkout_main {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .checkout_main--left,
+  .checkout_main--right {
+    width: 100%;
+    margin: 0;
+  }
+
+  .checkout_main--left {
+    max-width: 400px;
+  }
+
+  .checkout_main--right {
+    max-width: 100%;
+  }
+
+  .checkout_product--list {
+    margin: 0;
+  }
+
+  .checkout_summary--info {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 740px) {
+  .checkout_header {
+    padding-left: 15px;
+  }
+
+  .checkout_container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .checkout_main {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .checkout_main--left,
+  .checkout_main--right {
+    width: 100%;
+    margin: 0;
+  }
+
+  .checkout_main--left {
+    max-width: 400px;
+  }
+
+  .checkout_main--right {
+    max-width: 100%;
+  }
+
+  .checkout_product--list {
+    margin: 0;
+  }
+
+  .checkout_summary--info {
+    gap: 20px;
+  }
+}
+
+@media (min-width: 450px) and (max-width: 740px) {
+  .checkout_main--left,
+  .checkout_main--right {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 450px;
+  }
+
+  .checkout_summary--info {
+    gap: 50px;
+  }
+}
+
+@media (max-width: 450px) {
+  .checkout_button {
+    height: 38px;
+    max-width: 150px;
+    font-size: 16px;
+  }
+
+  .checkout_button {
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 320px) {
+  .checkout_button {
+    margin-right: 0px;
+  }
 }

@@ -1,0 +1,78 @@
+/** @format */
+
+.order_item--container {
+  background-color: var(--background-color);
+  font-family: var(--normal-font);
+  padding: 30px;
+  display: flex;
+  letter-spacing: 0.3px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  gap: 10px;
+}
+
+.order_item--info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  line-height: 20px;
+}
+
+.order_item--heading {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.order_item--main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 30px;
+}
+
+.order_info--name {
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.order_total {
+  display: flex;
+  justify-content: end;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+@media (min-width: 740px) and (max-width: 1023px) {
+  .order_item--container {
+    padding: 20px;
+    margin-bottom: 30px;
+    gap: 10px;
+  }
+
+  .order_item--info {
+    gap: 15px;
+    line-height: 20px;
+  }
+
+  .order_item--main {
+    gap: 8px;
+    padding-left: 0px;
+  }
+}
+
+@media (max-width: 740px) {
+  .order_item--container {
+    flex-direction: column;
+    gap: 30px;
+    padding: 15px;
+  }
+
+  .order_item--info {
+    gap: 10px;
+    line-height: 20px;
+  }
+
+  .order_item--main {
+    gap: 8px;
+  }
+}

@@ -1,0 +1,21 @@
+/** @format */
+
+.order_header {
+  background-color: var(--black-color);
+  padding-bottom: 10px;
+}
+
+.order_heading {
+  color: var(--coffee-color);
+  font-size: 30px;
+  margin-top: 30px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+@media (max-width: 740px) {
+  .order_header {
+    padding-left: 15px;
+  }
+}

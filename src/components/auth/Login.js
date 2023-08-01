@@ -33,7 +33,8 @@ function Login() {
           // email: customerData.email,
           wishlist: customerData.wishlist,
           cart: customerData.cart,
-          boughtProduct: customerData.boughtProduct,
+          // order: customerData.order,
+          // boughtProduct: customerData.boughtProduct,
           checkoutProduct: []
         };
         localStorage.setItem("user", JSON.stringify(user));

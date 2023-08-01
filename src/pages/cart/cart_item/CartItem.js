@@ -33,6 +33,8 @@ function CartItem(props) {
             handleClickCart={props.handleClickCart}
             setNoOfItem={setNoItem}
             noOfItem={noItem}
+            productQuantity={props.productQuantity}
+            productSold={props.productSold}
           >
             <div className="cart_item--product">
               <img

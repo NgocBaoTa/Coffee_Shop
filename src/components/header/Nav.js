@@ -75,7 +75,7 @@ function Nav() {
     localStorage.clear();
     if (
       window.location.pathname === "/cart" ||
-      window.location.pathname === "/wishlist" ||
+      // window.location.pathname === "/wishlist" ||
       window.location.pathname === "/orders" || 
       window.location.pathname === "/checkout"
     ) {
@@ -204,7 +204,7 @@ function Nav() {
                         open={Boolean(anchorElUser)}
                         onClose={handleCloseUserMenu}
                       >
-                        <MenuItem onClick={handleCloseUserMenu}>
+                        {/* <MenuItem onClick={handleCloseUserMenu}>
                           <Typography textAlign="center">
                             <NavLink
                               to="/wishlist"
@@ -213,7 +213,7 @@ function Nav() {
                               Wishlist
                             </NavLink>
                           </Typography>
-                        </MenuItem>
+                        </MenuItem> */}
                         <MenuItem onClick={handleCloseUserMenu}>
                           <Typography textAlign="center">
                             <NavLink

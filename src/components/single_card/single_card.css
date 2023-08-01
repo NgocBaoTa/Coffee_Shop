@@ -5,7 +5,7 @@
   max-width: 200px;
   height: 280px;
   text-align: center;
-  background-color: #f8ddb4;
+  background-color: var(--background-color);
   margin-right: auto;
   margin-left: auto;
   position: relative;

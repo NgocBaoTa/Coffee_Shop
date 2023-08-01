@@ -23,6 +23,8 @@ function SingleCard(props) {
           id={props.id}
           index={props.index}
           handleClickCart={props.handleClickCart}
+          productSold={props.productSold}
+          productQuantity={props.productQuantity}
         >
           <img className="singleCard_img" src={props.src} alt="coffee" />
           <div className="singleCard_main--name">{props.name}</div>

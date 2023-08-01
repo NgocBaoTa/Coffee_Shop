@@ -195,10 +195,12 @@ function Recommended() {
                     : null
                 }
                 details={
-                  item.productDescription.detail
-                    ? item.productDescription.detail
+                  item.productDescription.details
+                    ? item.productDescription.details
                     : null
                 }
+                productQuantity={item.productQuantity}
+                productSold={item.productSold}
                 handleLikedClick={handleLikedClick}
                 index={index}
                 handleClickCart={handleClickCart}

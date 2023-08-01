@@ -1,16 +1,29 @@
 /** @format */
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./checkout.css";
 import { useNavigate } from "react-router-dom";
 import Nav from "../../components/header/Nav";
 import CheckoutItem from "./checkout_item/CheckoutItem";
 import axios from "axios";
 import { LoginContext } from "../../context/AuthContext";
+import { AlertContext } from "../../context/AlertContext";
+
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 
 function Checkout() {
+  const {
+    openAddCart,
+    openAlertLogin,
+    handleCloseAddCart,
+    handleCloseAlertLogin,
+    setOpenAlertLogin,
+    setOpenAddCart,
+  } = useContext(AlertContext);
+
   const navigate = useNavigate();
-  const { userID, cart, setCart } = useContext(LoginContext);
+  const { userID, cart, setCart, setWishList } = useContext(LoginContext);
   const [invalidFields, setInvalidFields] = useState([]);
   let user = JSON.parse(localStorage.getItem("user"));
 
@@ -18,6 +31,7 @@ function Checkout() {
     name: "",
     phone: "",
     address: "",
+    postalCode: "",
   });
 
   const [paymentInfo, setPaymentInfo] = useState({
@@ -36,8 +50,16 @@ function Checkout() {
       !/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(
         shippingInfo.phone
       )
-    )
+    ) {
       invalidField.push("phone");
+    }
+    if (
+      !/^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i.test(
+        shippingInfo.postalCode
+      )
+    ) {
+      invalidField.push("postalCode");
+    }
     if (paymentInfo.cardHolder.length === 0) invalidField.push("cardHolder");
     if (paymentInfo.method.length === 0) invalidField.push("method");
     if (paymentInfo.cardNumber.length !== 19) invalidField.push("cardNumber");
@@ -61,8 +83,8 @@ function Checkout() {
 
   let checkoutProducts = user.checkoutProduct;
 
-  let products = checkoutProducts.map(({ id, noOfItems }) => ({
-    id,
+  let product = checkoutProducts.map(({ id, noOfItems }) => ({
+    productID: id,
     noOfItems,
   }));
 
@@ -78,8 +100,10 @@ function Checkout() {
       if (checkValidation().length === 0) {
         const data = await axios.post("/orders", {
           customerID: user.userID,
-          orderProducts: products,
+          orderReceiver: shippingInfo.name,
+          orderProducts: product,
           orderAddress: shippingInfo.address,
+          orderPostalCode: shippingInfo.postalCode,
           orderPhone: +shippingInfo.phone,
           orderPayMethod: paymentInfo.method,
           orderCardholder: paymentInfo.cardHolder,
@@ -89,8 +113,23 @@ function Checkout() {
           orderSubtotal: subtotal,
         });
 
+        // let orderList = user.order;
+        // orderList.push(data.data.order.id);
+        // const updateData = await axios.put(`/customers/${user.userID}`, {
+        //   order: orderList,
+        // });
+
+        checkoutProducts.forEach(async (product) => {
+          let quantity = product.productQuantity;
+          let sold = product.productSold;
+          await axios.put(`/products/${product.id}`, {
+            productQuantity: quantity - product.noOfItems,
+            productSold: sold + product.noOfItems,
+          });
+        });
+
         const updatedCart = cart.filter(
-          (item) => !products.some((product) => product.id === item.productID)
+          (item) => !product.some((p) => p.productID === item.productID)
         );
 
         setCart(updatedCart);
@@ -109,8 +148,115 @@ function Checkout() {
     }
   };
 
+  //===================================================================
+
+  useEffect(() => {
+    if (user) {
+      user.wishlist.forEach((item) => {
+        const product = checkoutProducts.find((p) => p._id === item);
+        if (product) {
+          product.isLiked = true;
+        }
+      });
+
+      checkoutProducts.forEach((item) => {
+        if (!item.isLiked) {
+          item.isLiked = false;
+        }
+      });
+    }
+  }, []);
+
+  const handleLikedClick = (id, index) => {
+    if (user) {
+      setWishList((prevWishlist) => {
+        const newWishlist = [...prevWishlist];
+
+        if (checkoutProducts[index].isLiked === false) {
+          checkoutProducts[index].isLiked = true;
+          newWishlist.push(id);
+        } else {
+          checkoutProducts[index].isLiked = false;
+          const indexToRemove = newWishlist.indexOf(id);
+          if (indexToRemove !== -1) {
+            newWishlist.splice(indexToRemove, 1);
+          }
+        }
+
+        const updatedUser = { ...user, wishlist: newWishlist };
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+
+        return newWishlist;
+      });
+    } else {
+      setOpenAlertLogin(true);
+    }
+  };
+
+  const handleClickCart = (id, noItem) => {
+    if (user) {
+      setCart((prevCart) => {
+        const newCart = [...prevCart];
+
+        let index = -1;
+        newCart.forEach((item, idx) => {
+          if (item.productID === id) {
+            index = idx;
+            return;
+          }
+        });
+        if (index !== -1) {
+          newCart[index].no += noItem;
+        } else {
+          let newProduct = {};
+          newProduct.productID = id;
+          newProduct.no = noItem;
+          newCart.push(newProduct);
+        }
+
+        const updatedUser = { ...user, cart: newCart };
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+
+        return newCart;
+      });
+
+      setOpenAddCart(true);
+    } else {
+      setOpenAlertLogin(true);
+    }
+  };
+
   return (
     <>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        open={openAddCart}
+        onClose={handleCloseAddCart}
+        autoHideDuration={6000}
+      >
+        <Alert
+          onClose={handleCloseAddCart}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Product is added to cart!
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        open={openAlertLogin}
+        onClose={handleCloseAlertLogin}
+        autoHideDuration={6000}
+      >
+        <Alert
+          onClose={handleCloseAlertLogin}
+          severity="warning"
+          sx={{ width: "100%" }}
+        >
+          Please login to continue!
+        </Alert>
+      </Snackbar>
       <div className="checkout_header">
         <Nav />
       </div>
@@ -201,7 +347,7 @@ function Checkout() {
                       onChange={(e) => {
                         setShippingInfo({
                           ...shippingInfo,
-                          address: e.target.value.trim(),
+                          address: e.target.value,
                         });
                         if (invalidFields.includes("address")) {
                           let newArr = invalidFields.filter(
@@ -210,6 +356,37 @@ function Checkout() {
                           setInvalidFields(newArr);
                           document
                             .querySelector('input[name="address"]')
+                            .classList.remove("invalid");
+                        }
+                      }}
+                    />
+                  </div>
+
+                  <div className="checkout_shipping--item">
+                    <input
+                      required
+                      type="text"
+                      maxLength={7}
+                      className={
+                        invalidFields.includes("postalCode")
+                          ? "invalid checkout_shipping--input"
+                          : "checkout_shipping--input"
+                      }
+                      placeholder="Postal Code"
+                      value={shippingInfo.postalCode}
+                      name="postalCode"
+                      onChange={(e) => {
+                        setShippingInfo({
+                          ...shippingInfo,
+                          postalCode: e.target.value.trim().toUpperCase(), 
+                        });
+                        if (invalidFields.includes("postalCode")) {
+                          let newArr = invalidFields.filter(
+                            (field) => field !== "postalCode"
+                          );
+                          setInvalidFields(newArr);
+                          document
+                            .querySelector('input[name="postalCode"]')
                             .classList.remove("invalid");
                         }
                       }}
@@ -420,14 +597,36 @@ function Checkout() {
                 </div>
                 <hr />
                 <div className="checkout_product--list">
-                  {checkoutProducts.map((product) => {
+                  {checkoutProducts.map((item, index) => {
                     return (
                       <CheckoutItem
-                        key={product._id}
-                        src={product.productImage}
-                        name={product.productName}
-                        quantity={product.noOfItems}
-                        price={product.productPrice}
+                        key={item._id}
+                        src={item.productImage}
+                        name={item.productName}
+                        quantity={item.noOfItems}
+                        id={item._id}
+                        price={item.productPrice.toFixed(2)}
+                        isLiked={item.isLiked ? item.isLiked : false}
+                        description={
+                          item.productDescription.description
+                            ? item.productDescription.description
+                            : null
+                        }
+                        story={
+                          item.productDescription.story
+                            ? item.productDescription.story
+                            : null
+                        }
+                        details={
+                          item.productDescription.details
+                            ? item.productDescription.details
+                            : null
+                        }
+                        productQuantity={item.productQuantity}
+                        productSold={item.productSold}
+                        handleLikedClick={handleLikedClick}
+                        index={index}
+                        handleClickCart={handleClickCart}
                       />
                     );
                   })}

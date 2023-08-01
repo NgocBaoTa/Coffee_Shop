@@ -52,10 +52,18 @@ function ContentModal(props) {
           <div className="l-7 m-7 c-12 col modal_info--container">
             <div className="modal_info">
               <div className="modal_info--main">
-                <div className="modal_main--name">{props.name}</div>
+                <div className="modal_main--name">
+                  {props.name.toUpperCase()}
+                </div>
                 {/* <div className="modal_main--name">ORGANIC COFFEE</div> */}
                 {/* <div className="modal_main--price">$21.3</div> */}
-                <div className="modal_main--price">${props.price}</div>
+                <div className="modal_main--info">
+                  <div className="modal_main--price">${props.price}</div>
+                  <div className="modal_main--number">
+                    <div>In stock: {props.productQuantity}</div>
+                    <div>Sold: {props.productSold}</div>
+                  </div>
+                </div>
                 <hr className="modal_main--hr"></hr>
                 <div className="modal_main--group">
                   <div className="modal_main--input">
@@ -80,7 +88,9 @@ function ContentModal(props) {
                       className="main_btn--item main_btn--plus"
                       onClick={() => {
                         let value = noItem;
-                        setNoItem(++value);
+                        if (value !== props.productQuantity) {
+                          setNoItem(++value);
+                        }
                       }}
                     >
                       +
@@ -116,6 +126,7 @@ function ContentModal(props) {
                   </div>
                 </div>
               </div>
+
               <div className="modal_info--description">
                 {props.description ? (
                   <div className="modal_info--desc">{props.description}</div>

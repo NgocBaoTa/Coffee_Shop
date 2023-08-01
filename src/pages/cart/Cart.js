@@ -7,10 +7,10 @@ import Header from "./cart_header/Header";
 import CartItem from "./cart_item/CartItem";
 import { LoginContext } from "../../context/AuthContext";
 import axios from "axios";
+import CartBottom from "./cart_bottom/CartBottom";
 
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import CartBottom from "./cart_bottom/CartBottom";
 
 function Cart() {
   const navigate = useNavigate();
@@ -347,12 +347,14 @@ function Cart() {
                         : null
                     }
                     details={
-                      item.productDescription.detail
-                        ? item.productDescription.detail
+                      item.productDescription.details
+                        ? item.productDescription.details
                         : null
                     }
                     index={index}
                     noOfItems={item.noOfItems}
+                    productQuantity={item.productQuantity}
+                    productSold={item.productSold}
                     isChosen={item.isChosen}
                     handleLikedClick={handleLikedClick}
                     handleClickCart={handleClickCart}

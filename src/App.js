@@ -13,6 +13,7 @@ import Register from "./components/auth/Register";
 import Cart from "./pages/cart/Cart";
 import Checkout from "./pages/checkout_page/Checkout";
 import Order from "./pages/order_page/Order";
+import Wishlist from "./pages/wishlist_page/Wishlist";
 
 function App() {
   const { login } = useContext(LoginContext);
@@ -24,9 +25,10 @@ function App() {
       <Route path="/about" element={<About />} />
       <Route path="/auth/login" element={<Login />} />
       <Route path="/auth/register" element={<Register />} />
-      {login ? <Route path="/cart" element={<Cart />} /> : <></>}
-      {login ? <Route path="/checkout" element={<Checkout />} /> : <></>}
-      {login ? <Route path="/orders" element={<Order />} /> : <></>}
+      <Route path="/cart" element={login ? <Cart /> : <Login />} />
+      <Route path="/checkout" element={login ? <Checkout /> : <Login />} />
+      <Route path="/orders" element={login ? <Order /> : <Login />} />
+      <Route path="/wishlist" element={login ? <Wishlist /> : <Login />} />
       <Route path="*" element={<h2>Page not found</h2>} />
     </Routes>
   );

@@ -1,10 +1,12 @@
 /** @format */
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./discover.css";
 import Button from "../../../components/button/Button";
 
 function Discover() {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="discover_container grid wide">
@@ -17,7 +19,17 @@ function Discover() {
             There is no doubt that you will enjoy this coffee more than others
             you have ever tasted.
           </div>
-          <Button name="Learn More" />
+          <div
+            onClick={() => {
+              navigate("/about");
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            }}
+          >
+            <Button name="Learn More" />
+          </div>
         </div>
 
         <img

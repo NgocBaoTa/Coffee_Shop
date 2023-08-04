@@ -28,7 +28,7 @@ function Footer() {
           <div className="footer_right--address footer_right--item">
             <LocationOnRoundedIcon className="footer_right--icon" />
             <div className="footer_right--text">
-              16 Edgeware Dr, Etobicoke, Toronto, ON, Canada
+              Etobicoke, Toronto, ON, Canada
             </div>
           </div>
           <div className="footer_right--phone footer_right--item">

@@ -1,42 +1,17 @@
 /** @format */
 
 import React, { useEffect, useState, useContext } from "react";
+import {useNavigate} from "react-router-dom"
 import "./recommended.css";
 import Button from "../../../components/button/Button";
 import axios from "axios";
 import SingleCard from "../../../components/single_card/SingleCard";
 import { LoginContext } from "../../../context/AuthContext";
 
-import Alert from "@mui/material/Alert";
-import Snackbar from "@mui/material/Snackbar";
-import { AlertContext } from "../../../context/AlertContext";
-function Recommended() {
-  // const [openAddCart, setOpenAddCart] = useState(false);
-  // const [openAlertLogin, setOpenAlertLogin] = useState(false);
+function Recommended(props) {
+  const navigate = useNavigate();
 
-  // const handleCloseAddCart = (event, reason) => {
-  //   if (reason === "clickaway") {
-  //     return;
-  //   }
-  //   setOpenAddCart(false);
-  // };
-
-  // const handleCloseAlertLogin = (event, reason) => {
-  //   if (reason === "clickaway") {
-  //     return;
-  //   }
-  //   setOpenAlertLogin(false);
-  // };
-  const {
-    openAddCart,
-    openAlertLogin,
-    handleCloseAddCart,
-    handleCloseAlertLogin,
-    setOpenAlertLogin,
-    setOpenAddCart,
-  } = useContext(AlertContext);
-
-  const { setWishList, setCart } = useContext(LoginContext);
+  const { setWishList, setCart, login } = useContext(LoginContext);
   const [products, setProducts] = useState([]);
   let user = JSON.parse(localStorage.getItem("user"));
 
@@ -100,7 +75,7 @@ function Recommended() {
         return newWishlist;
       });
     } else {
-      setOpenAlertLogin(true);
+      props.setOpenAlertLogin(true);
     }
   };
 
@@ -131,43 +106,14 @@ function Recommended() {
         return newCart;
       });
 
-      setOpenAddCart(true);
+      props.setOpenAddCart(true);
     } else {
-      setOpenAlertLogin(true);
+      props.setOpenAlertLogin(true);
     }
   };
 
   return (
     <>
-      <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        open={openAddCart}
-        onClose={handleCloseAddCart}
-        autoHideDuration={6000}
-      >
-        <Alert
-          onClose={handleCloseAddCart}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          Product is added to cart!
-        </Alert>
-      </Snackbar>
-
-      <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        open={openAlertLogin}
-        onClose={handleCloseAlertLogin}
-        autoHideDuration={6000}
-      >
-        <Alert
-          onClose={handleCloseAlertLogin}
-          severity="warning"
-          sx={{ width: "100%" }}
-        >
-          Please login to continue!
-        </Alert>
-      </Snackbar>
       <div className="recommended_container grid wide">
         <div className="recommended_heading">Recommended products</div>
         <div className="recommended_text">
@@ -214,7 +160,17 @@ function Recommended() {
             Great ideas start with great coffee, Lets help you achieve that
           </div>
           <div className="recommended_bottom--main"> Get started today.</div>
-          <Button className="recommended_bottom--btn" name="Join Us" />
+          <div
+            onClick={() => {
+              navigate(login ? "/" : "auth/login");
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            }}
+          >
+            <Button className="recommended_bottom--btn" name="Join Us" />
+          </div>
         </div>
       </div>
     </>

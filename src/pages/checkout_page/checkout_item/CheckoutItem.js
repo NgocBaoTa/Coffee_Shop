@@ -5,6 +5,7 @@ import "./checkout_item.css";
 import ContentModal from "../../../components/content_modal/ContentModal";
 
 function Checkout_item(props) {
+
   return (
     <>
       <div className="checkout_item--container">

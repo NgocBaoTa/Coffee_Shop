@@ -17,13 +17,12 @@ function SingleItem(props) {
         <div className="item_info--main ">
           <div className="item_price">{`$ ${props.price}`}</div>
           <div className="item_icon">
-            {/* check if it is a product => show the cart, if not, just show the heart */}
             {props.isProduct ? (
               <ShoppingCartCheckoutRoundedIcon className="item_icon--cart" />
             ) : (
               <></>
             )}
-            {/* check if the product is loved (add to favorite list) => show the full heart */}
+  
             {!props.isLiked ? (
               <FavoriteBorderRoundedIcon className="item_icon--love" />
             ) : (

@@ -75,7 +75,7 @@ function Nav() {
     localStorage.clear();
     if (
       window.location.pathname === "/cart" ||
-      // window.location.pathname === "/wishlist" ||
+      window.location.pathname === "/wishlist" ||
       window.location.pathname === "/orders" || 
       window.location.pathname === "/checkout"
     ) {
@@ -182,7 +182,7 @@ function Nav() {
                         <Stack direction="row" spacing={2}>
                           <Avatar
                             {...stringAvatar(
-                              JSON.parse(localStorage.getItem("user")).username
+                              JSON.parse(localStorage.getItem("user"))?.username
                             )}
                             sx={{ width: 35, height: 35 }}
                           />
@@ -204,7 +204,7 @@ function Nav() {
                         open={Boolean(anchorElUser)}
                         onClose={handleCloseUserMenu}
                       >
-                        {/* <MenuItem onClick={handleCloseUserMenu}>
+                        <MenuItem onClick={handleCloseUserMenu}>
                           <Typography textAlign="center">
                             <NavLink
                               to="/wishlist"
@@ -213,7 +213,7 @@ function Nav() {
                               Wishlist
                             </NavLink>
                           </Typography>
-                        </MenuItem> */}
+                        </MenuItem>
                         <MenuItem onClick={handleCloseUserMenu}>
                           <Typography textAlign="center">
                             <NavLink
@@ -268,15 +268,16 @@ function Nav() {
               </>
             ) : (
               <>
+                  <div className="l-3"></div>
                 <NavLink
                   to="/auth/login"
-                  className="nav_right--login nav_right--item l-4 m-5"
+                  className="nav_right--login nav_right--item l-2 m-5"
                 >
                   Sign In
                 </NavLink>
                 <NavLink
                   to="/auth/register"
-                  className="nav_right--signup nav_right--item l-6 m-7"
+                  className="nav_right--signup nav_right--item l-5 m-7"
                 >
                   Sign Up
                 </NavLink>

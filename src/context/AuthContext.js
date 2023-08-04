@@ -3,13 +3,42 @@
 import React, { useState, useEffect } from "react";
 import { createContext } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const LoginContext = createContext();
 
 function LoginProvider({ children }) {
+  const navigate = useNavigate();
   const [login, setLogin] = useState(
     localStorage.getItem("user") ? Boolean(localStorage.getItem("user")) : false
   );
+
+  // const checkIsLogin = async () => {
+  //   console.log("CHECK.");
+  //   try {
+  //     let data = await axios.get("/customers/check");
+  //     console.log(data.data.success);
+
+  //     if (!data.data.success) {
+  //       localStorage.removeItem("user");
+  //       setLogin(false);
+  //       if (
+  //         window.location.pathname === "/cart" ||
+  //         window.location.pathname === "/wishlist" ||
+  //         window.location.pathname === "/orders" ||
+  //         window.location.pathname === "/checkout"
+  //       ) {
+  //         navigate("/");
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // setInterval(() => {
+  //   checkIsLogin();
+  // }, 31000);
 
   const [wishlist, setWishList] = useState(
     JSON.parse(localStorage.getItem("user"))?.wishlist || []
@@ -29,8 +58,7 @@ function LoginProvider({ children }) {
   }, [login]);
   // console.log(wishlist);
   useEffect(() => {
-    // if (login && userID.length > 0) {
-    if (login && userID.length > 0) {    
+    if (login && userID.length > 0) {
       const updateData = async () => {
         try {
           let data = await axios.put(
@@ -70,6 +98,7 @@ function LoginProvider({ children }) {
           setCart,
           userID,
           setUserID,
+          // checkIsLogin,
         }}
       >
         {children}

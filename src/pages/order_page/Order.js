@@ -46,12 +46,7 @@ function Order() {
         <Nav />
       </div>
       <div className="order_container grid wide">
-        <div
-          className="order_heading"
-          onClick={() => console.log("ORDER: ", orders)}
-        >
-          Your Orders
-        </div>
+        <div className="order_heading">Your Orders</div>
         <div className="order_main">
           {orders.map((item) => {
             return (

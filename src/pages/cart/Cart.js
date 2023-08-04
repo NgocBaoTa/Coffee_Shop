@@ -43,7 +43,9 @@ function Cart() {
   const fetchData = async () => {
     try {
       let data = await axios.get(
-        "/products?categoryName=Product"
+        "/products"
+
+        // "/products?categoryName=Product"
         // "https://coffee-shop-ony3.onrender.com/products?categoryName=Product"
       );
 

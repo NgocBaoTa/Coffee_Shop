@@ -69,10 +69,6 @@
   cursor: pointer;
 }
 
-.nav_right--signup {
-  margin-top: -10px;
-}
-
 .nav_button {
   display: none;
 }

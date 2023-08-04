@@ -14,24 +14,6 @@ import Snackbar from "@mui/material/Snackbar";
 import { AlertContext } from "../../context/AlertContext";
 
 function Product() {
-  // ALERT  -  start
-  // const [openAddCart, setOpenAddCart] = useState(false);
-  // const [openAlertLogin, setOpenAlertLogin] = useState(false);
-
-  // const handleCloseAddCart = (event, reason) => {
-  //   if (reason === "clickaway") {
-  //     return;
-  //   }
-  //   setOpenAddCart(false);
-  // };
-
-  // const handleCloseAlertLogin = (event, reason) => {
-  //   if (reason === "clickaway") {
-  //     return;
-  //   }
-  //   setOpenAlertLogin(false);
-  // };
-  // ALERT  -  end
 
   const {
     openAddCart,
@@ -44,7 +26,7 @@ function Product() {
 
   const [showSearch, setShowSearch] = useState(false);
   const [searchText, setSearchText] = useState("");
-  const { setWishList, setCart, cart, wishlist } = useContext(LoginContext);
+  const { setWishList, setCart } = useContext(LoginContext);
   const [products, setProducts] = useState([]);
   let user = JSON.parse(localStorage.getItem("user"));
 

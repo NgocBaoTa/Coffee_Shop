@@ -26,6 +26,8 @@ function Login() {
         setErrMessage(customerData.message);
       } else {
         customerData = data.data.customer;
+        let now = new Date();
+        let timeToLive = 30 * 100;
         let user = {
           userID: customerData._id,
           // user_token: customerData.accessToken,
@@ -35,7 +37,8 @@ function Login() {
           cart: customerData.cart,
           // order: customerData.order,
           // boughtProduct: customerData.boughtProduct,
-          checkoutProduct: []
+          checkoutProduct: [],
+          expiry: now.getTime() + timeToLive,
         };
         localStorage.setItem("user", JSON.stringify(user));
         setUserID(customerData._id);

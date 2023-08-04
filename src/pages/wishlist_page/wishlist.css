@@ -1,0 +1,26 @@
+.wishlist_header {
+  background-color: var(--black-color);
+  padding-bottom: 10px;
+}
+
+.wishlist_heading {
+  color: var(--coffee-color);
+  font-size: 30px;
+  margin-top: 30px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.wishlist_main {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin-top: 50px;
+}
+
+@media (max-width: 740px) {
+  .wishlist_header {
+    padding-left: 15px;
+  }
+}

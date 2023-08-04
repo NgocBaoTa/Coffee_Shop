@@ -1,10 +1,14 @@
 /** @format */
 
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import "./box.css";
 import Button from "../button/Button";
+import { LoginContext } from "../../context/AuthContext";
 
 function Box() {
+  const navigate = useNavigate();
+  const { login } = useContext(LoginContext);
   return (
     <div className="box_container wide grid">
       <div className="box_main">
@@ -19,7 +23,17 @@ function Box() {
         </div>
       </div>
 
-      <Button className="box_button" name="Order Now"></Button>
+      <div
+        onClick={() => {
+          navigate(login ? "/cart" : "auth/login");
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        }}
+      >
+        <Button className="box_button" name="Order Now"></Button>
+      </div>
     </div>
   );
 }

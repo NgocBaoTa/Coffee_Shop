@@ -3,11 +3,7 @@
 import React, { useContext, useState } from "react";
 import "./order_item.css";
 import CheckoutItem from "../../checkout_page/checkout_item/CheckoutItem";
-import { AlertContext } from "../../../context/AlertContext";
 import { LoginContext } from "../../../context/AuthContext";
-
-import Alert from "@mui/material/Alert";
-import Snackbar from "@mui/material/Snackbar";
 import { Support } from "../../../Support";
 import AlertMsg from "../../../components/AlertMsg";
 
@@ -15,29 +11,17 @@ function OrderItem(props) {
   let user = JSON.parse(localStorage.getItem("user"));
   const [products, setProducts] = useState(props.products);
   const {
-    handleChangeCart,
     handleCloseAddCart,
     handleCloseAlertLogin,
-    handleDeleteProduct,
     handleClickCart,
-    // handleLikedClick,
     openAddCart,
     openAlertLogin,
+    setOpenAlertLogin,
   } = Support();
 
-  const {
-    // openAddCart,
-    // openAlertLogin,
-    // handleCloseAddCart,
-    // handleCloseAlertLogin,
-    setOpenAlertLogin,
-    setOpenAddCart,
-  } = useContext(AlertContext);
-
-  const { setCart, setWishList } = useContext(LoginContext);
+  const { setWishList } = useContext(LoginContext);
 
   const handleLikedClick = (id, index) => {
-    console.log("Products: ", products);
     if (user) {
       setWishList((prevWishlist) => {
         const newWishlist = [...prevWishlist];
@@ -65,70 +49,8 @@ function OrderItem(props) {
     }
   };
 
-  // const handleClickCart = (id, noItem) => {
-  //   if (user) {
-  //     setCart((prevCart) => {
-  //       const newCart = [...prevCart];
-
-  //       let index = -1;
-  //       newCart.forEach((item, idx) => {
-  //         if (item.productID === id) {
-  //           index = idx;
-  //           return;
-  //         }
-  //       });
-  //       if (index !== -1) {
-  //         newCart[index].no += noItem;
-  //       } else {
-  //         let newProduct = {};
-  //         newProduct.productID = id;
-  //         newProduct.no = noItem;
-  //         newCart.push(newProduct);
-  //       }
-
-  //       const updatedUser = { ...user, cart: newCart };
-  //       localStorage.setItem("user", JSON.stringify(updatedUser));
-
-  //       return newCart;
-  //     });
-
-  //     setOpenAddCart(true);
-  //   } else {
-  //     setOpenAlertLogin(true);
-  //   }
-  // };
   return (
     <>
-      {/* <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        open={openAddCart}
-        onClose={handleCloseAddCart}
-        autoHideDuration={6000}
-      >
-        <Alert
-          onClose={handleCloseAddCart}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          Product is added to cart!
-        </Alert>
-      </Snackbar>
-
-      <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        open={openAlertLogin}
-        onClose={handleCloseAlertLogin}
-        autoHideDuration={6000}
-      >
-        <Alert
-          onClose={handleCloseAlertLogin}
-          severity="warning"
-          sx={{ width: "100%" }}
-        >
-          Please login to continue!
-        </Alert>
-      </Snackbar> */}
-
       <AlertMsg
         openAddCart={openAddCart}
         openAlertLogin={openAlertLogin}

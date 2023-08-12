@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import "./cartItem.css";
 import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 import ContentModal from "../../../components/content_modal/ContentModal";

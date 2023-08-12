@@ -5,7 +5,6 @@ import "./product_list.css";
 import SingleCard from "../../../components/single_card/SingleCard";
 
 function ProductList(props) {
-
   return (
     <div className="grid wide">
       <div className="productList_container">

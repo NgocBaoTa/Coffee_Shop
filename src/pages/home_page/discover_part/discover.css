@@ -3,7 +3,6 @@
 .discover_container {
   display: flex;
   font-family: var(--normal-font);
-  /* padding-top: 70px; */
   padding-left: 80px;
   padding-right: 80px;
   align-items: center;

@@ -7,28 +7,21 @@ import Nav from "../../components/header/Nav";
 import CheckoutItem from "./checkout_item/CheckoutItem";
 import axios from "axios";
 import { LoginContext } from "../../context/AuthContext";
-import { AlertContext } from "../../context/AlertContext";
 import { Support } from "../../Support";
-
-import Alert from "@mui/material/Alert";
-import Snackbar from "@mui/material/Snackbar";
 import AlertMsg from "../../components/AlertMsg";
 
 function Checkout() {
   const {
-    // openAddCart,
-    // openAlertLogin,
-    // handleCloseAddCart,
-    // handleCloseAlertLogin,
+    handleCloseAddCart,
+    handleCloseAlertLogin,
+    handleClickCart,
+    openAddCart,
+    openAlertLogin,
     setOpenAlertLogin,
-    setOpenAddCart,
-  } = useContext(AlertContext);
-
-  const { handleCloseAddCart, handleCloseAlertLogin, handleClickCart, openAddCart, openAlertLogin} =
-    Support();
+  } = Support();
 
   const navigate = useNavigate();
-  const { userID, cart, setCart, setWishList } = useContext(LoginContext);
+  const { cart, setCart, setWishList } = useContext(LoginContext);
   const [invalidFields, setInvalidFields] = useState([]);
   let user = JSON.parse(localStorage.getItem("user"));
 
@@ -118,12 +111,6 @@ function Checkout() {
           orderSubtotal: subtotal,
         });
 
-        // let orderList = user.order;
-        // orderList.push(data.data.order.id);
-        // const updateData = await axios.put(`/customers/${user.userID}`, {
-        //   order: orderList,
-        // });
-
         checkoutProducts.forEach(async (product) => {
           let quantity = product.productQuantity;
           let sold = product.productSold;
@@ -198,71 +185,8 @@ function Checkout() {
     }
   };
 
-  // const handleClickCart = (id, noItem) => {
-  //   if (user) {
-  //     setCart((prevCart) => {
-  //       const newCart = [...prevCart];
-
-  //       let index = -1;
-  //       newCart.forEach((item, idx) => {
-  //         if (item.productID === id) {
-  //           index = idx;
-  //           return;
-  //         }
-  //       });
-  //       if (index !== -1) {
-  //         newCart[index].no += noItem;
-  //       } else {
-  //         let newProduct = {};
-  //         newProduct.productID = id;
-  //         newProduct.no = noItem;
-  //         newCart.push(newProduct);
-  //       }
-
-  //       const updatedUser = { ...user, cart: newCart };
-  //       localStorage.setItem("user", JSON.stringify(updatedUser));
-
-  //       return newCart;
-  //     });
-
-  //     setOpenAddCart(true);
-  //   } else {
-  //     setOpenAlertLogin(true);
-  //   }
-  // };
-
   return (
     <>
-      {/* <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        open={openAddCart}
-        onClose={handleCloseAddCart}
-        autoHideDuration={6000}
-      >
-        <Alert
-          onClose={handleCloseAddCart}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          Product is added to cart!
-        </Alert>
-      </Snackbar>
-
-      <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        open={openAlertLogin}
-        onClose={handleCloseAlertLogin}
-        autoHideDuration={6000}
-      >
-        <Alert
-          onClose={handleCloseAlertLogin}
-          severity="warning"
-          sx={{ width: "100%" }}
-        >
-          Please login to continue!
-        </Alert>
-      </Snackbar> */}
-
       <AlertMsg
         openAddCart={openAddCart}
         openAlertLogin={openAlertLogin}

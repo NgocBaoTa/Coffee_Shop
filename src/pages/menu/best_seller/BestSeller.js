@@ -1,26 +1,22 @@
 /** @format */
 
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import "./best_seller.css";
 import axios from "axios";
-import { LoginContext } from "../../../context/AuthContext";
 import SingleCard from "../../../components/single_card/SingleCard";
 import { Support } from "../../../Support";
 import AlertMsg from "../../../components/AlertMsg";
 
-function BestSeller(props) {
+function BestSeller() {
   const [products, setProducts] = useState([]);
   const {
-    handleChangeCart,
     handleCloseAddCart,
     handleCloseAlertLogin,
-    handleDeleteProduct,
     handleClickCart,
     handleLikedClick,
     openAddCart,
     openAlertLogin,
   } = Support();
-  const { setWishList, setCart } = useContext(LoginContext);
   let user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
@@ -56,67 +52,6 @@ function BestSeller(props) {
     };
     fetchData();
   }, []);
-
-  // const handleClickCart = (id, noItem) => {
-  //   if (user) {
-  //     setCart((prevCart) => {
-  //       const newCart = [...prevCart];
-
-  //       let index = -1;
-  //       newCart.forEach((item, idx) => {
-  //         if (item.productID === id) {
-  //           index = idx;
-  //           return;
-  //         }
-  //       });
-  //       if (index !== -1) {
-  //         newCart[index].no += noItem;
-  //       } else {
-  //         let newProduct = {};
-  //         newProduct.productID = id;
-  //         newProduct.no = noItem;
-  //         newCart.push(newProduct);
-  //       }
-
-  //       const updatedUser = { ...user, cart: newCart };
-  //       localStorage.setItem("user", JSON.stringify(updatedUser));
-
-  //       return newCart;
-  //     });
-
-  //     props.setOpenAddCart(true);
-  //   } else {
-  //     props.setOpenAlertLogin(true);
-  //   }
-  // };
-
-  // const handleLikedClick = (id, index) => {
-  //   if (user) {
-  //     setWishList((prevWishlist) => {
-  //       const newWishlist = [...prevWishlist];
-  //       const newLikedProducts = [...products];
-
-  //       if (newLikedProducts[index].isLiked === false) {
-  //         newLikedProducts[index].isLiked = true;
-  //         newWishlist.push(id);
-  //       } else {
-  //         newLikedProducts[index].isLiked = false;
-  //         const indexToRemove = newWishlist.indexOf(id);
-  //         if (indexToRemove !== -1) {
-  //           newWishlist.splice(indexToRemove, 1);
-  //         }
-  //       }
-
-  //       const updatedUser = { ...user, wishlist: newWishlist };
-  //       localStorage.setItem("user", JSON.stringify(updatedUser));
-  //       setProducts(newLikedProducts);
-
-  //       return newWishlist;
-  //     });
-  //   } else {
-  //     props.setOpenAlertLogin(true);
-  //   }
-  // };
 
   return (
     <>

@@ -16,6 +16,7 @@ function CartBottom(props) {
     }
     setOpenAlertAddProduct(false);
   };
+  
   let user = JSON.parse(localStorage.getItem("user"));
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
@@ -53,6 +54,7 @@ function CartBottom(props) {
           Please choose product to check out!
         </Alert>
       </Snackbar>
+
       <div className="cart_bottom--left">
         <input
           type="checkbox"

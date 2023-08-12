@@ -3,17 +3,13 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./cart.css";
-import Header from "./cart_header/Header";
 import CartItem from "./cart_item/CartItem";
 import { LoginContext } from "../../context/AuthContext";
 import axios from "axios";
 import CartBottom from "./cart_bottom/CartBottom";
-import { AlertContext } from "../../context/AlertContext";
-
-import Alert from "@mui/material/Alert";
-import Snackbar from "@mui/material/Snackbar";
 import { Support } from "../../Support";
 import AlertMsg from "../../components/AlertMsg";
+import Nav from "../../components/header/Nav";
 
 function Cart() {
   const navigate = useNavigate();
@@ -27,35 +23,8 @@ function Cart() {
     openAddCart,
     openAlertLogin,
   } = Support();
-  // const {
-  //   openAddCart,
-  //   openAlertLogin,
-  //   handleCloseAddCart,
-  //   handleCloseAlertLogin,
-  //   setOpenAddCart,
-  //   setOpenAlertLogin,
-  // } = useContext(AlertContext);
 
-  // ALERT  -  start
-  // const [openAddCart, setOpenAddCart] = useState(false);
-  // const [openAlertLogin, setOpenAlertLogin] = useState(false);
-
-  // const handleCloseAddCart = (event, reason) => {
-  //   if (reason === "clickaway") {
-  //     return;
-  //   }
-  //   setOpenAddCart(false);
-  // };
-
-  // const handleCloseAlertLogin = (event, reason) => {
-  //   if (reason === "clickaway") {
-  //     return;
-  //   }
-  //   setOpenAlertLogin(false);
-  // };
-  // ALERT  -  end
-
-  const { setCart, setWishList, cart } = useContext(LoginContext);
+  const { cart } = useContext(LoginContext);
   const [products, setProducts] = useState([]);
   let user = JSON.parse(localStorage.getItem("user"));
 
@@ -129,99 +98,6 @@ function Cart() {
     fetchData();
   }, [cart]);
 
-  // const handleChangeCart = (id, noItem) => {
-  //   setCart((prevCart) => {
-  //     const newCart = [...prevCart];
-
-  //     newCart.forEach((item, idx) => {
-  //       if (item.productID === id) {
-  //         newCart[idx].no = noItem;
-  //         return;
-  //       }
-  //     });
-
-  //     const updatedUser = { ...user, cart: newCart };
-  //     localStorage.setItem("user", JSON.stringify(updatedUser));
-
-  //     return newCart;
-  //   });
-  // };
-
-  // const handleDeleteProduct = (id) => {
-  //   setCart((prevCart) => {
-  //     const newCart = [...prevCart];
-
-  //     newCart.forEach((item, idx) => {
-  //       if (item.productID === id) {
-  //         newCart.splice(idx, 1);
-  //         return;
-  //       }
-  //     });
-
-  //     const updatedUser = { ...user, cart: newCart };
-  //     localStorage.setItem("user", JSON.stringify(updatedUser));
-
-  //     return newCart;
-  //   });
-  // };
-
-  // const handleLikedClick = (id, index) => {
-  //   if (user) {
-  //     setWishList((prevWishlist) => {
-  //       const newWishlist = [...prevWishlist];
-  //       const newLikedProducts = [...products];
-
-  //       if (newLikedProducts[index].isLiked === false) {
-  //         newLikedProducts[index].isLiked = true;
-  //         newWishlist.push(id);
-  //       } else {
-  //         newLikedProducts[index].isLiked = false;
-  //         const indexToRemove = newWishlist.indexOf(id);
-  //         if (indexToRemove !== -1) {
-  //           newWishlist.splice(indexToRemove, 1);
-  //         }
-  //       }
-
-  //       const updatedUser = { ...user, wishlist: newWishlist };
-  //       localStorage.setItem("user", JSON.stringify(updatedUser));
-  //       setProducts(newLikedProducts);
-
-  //       return newWishlist;
-  //     });
-  //   } else {
-  //     setOpenAlertLogin(true);
-  //   }
-  // };
-
-  // const handleClickCart = (id, noItem) => {
-  //   setCart((prevCart) => {
-  //     const newCart = [...prevCart];
-
-  //     let index = -1;
-  //     newCart.forEach((item, idx) => {
-  //       if (item.productID === id) {
-  //         index = idx;
-  //         return;
-  //       }
-  //     });
-  //     if (index !== -1) {
-  //       newCart[index].no += noItem;
-  //     } else {
-  //       let newProduct = {};
-  //       newProduct.productID = id;
-  //       newProduct.no = noItem;
-  //       newCart.push(newProduct);
-  //     }
-
-  //     const updatedUser = { ...user, cart: newCart };
-  //     localStorage.setItem("user", JSON.stringify(updatedUser));
-
-  //     return newCart;
-  //   });
-
-  //   setOpenAddCart(true);
-  // };
-
   // Handle click CHECKBOX  -  START
 
   const handleChooseAll = (e) => {
@@ -282,36 +158,6 @@ function Cart() {
   return (
     <>
       <div>
-        {/* <Snackbar
-          anchorOrigin={{ vertical: "top", horizontal: "right" }}
-          open={openAddCart}
-          onClose={handleCloseAddCart}
-          autoHideDuration={6000}
-        >
-          <Alert
-            onClose={handleCloseAddCart}
-            severity="success"
-            sx={{ width: "100%" }}
-          >
-            Product is added to cart!
-          </Alert>
-        </Snackbar>
-
-        <Snackbar
-          anchorOrigin={{ vertical: "top", horizontal: "right" }}
-          open={openAlertLogin}
-          onClose={handleCloseAlertLogin}
-          autoHideDuration={6000}
-        >
-          <Alert
-            onClose={handleCloseAlertLogin}
-            severity="warning"
-            sx={{ width: "100%" }}
-          >
-            Please login to continue!
-          </Alert>
-        </Snackbar> */}
-
         <AlertMsg
           openAddCart={openAddCart}
           openAlertLogin={openAlertLogin}
@@ -319,7 +165,9 @@ function Cart() {
           handleCloseAlertLogin={handleCloseAlertLogin}
         />
 
-        <Header />
+        <div className="cart_bg_nav">
+          <Nav />
+        </div>
 
         <div className="cart_container grid wide">
           <div className="cart_table--header">

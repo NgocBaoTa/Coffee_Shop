@@ -9,6 +9,11 @@ input[type="checkbox"] {
   padding-top: 10px;
 }
 
+.cart_bg_nav {
+  background-color: var(--black-color);
+  padding-bottom: 10px;
+}
+
 .cart_table--header {
   display: flex;
   text-align-last: left;

@@ -8,19 +8,24 @@ import CheckoutItem from "./checkout_item/CheckoutItem";
 import axios from "axios";
 import { LoginContext } from "../../context/AuthContext";
 import { AlertContext } from "../../context/AlertContext";
+import { Support } from "../../Support";
 
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import AlertMsg from "../../components/AlertMsg";
 
 function Checkout() {
   const {
-    openAddCart,
-    openAlertLogin,
-    handleCloseAddCart,
-    handleCloseAlertLogin,
+    // openAddCart,
+    // openAlertLogin,
+    // handleCloseAddCart,
+    // handleCloseAlertLogin,
     setOpenAlertLogin,
     setOpenAddCart,
   } = useContext(AlertContext);
+
+  const { handleCloseAddCart, handleCloseAlertLogin, handleClickCart, openAddCart, openAlertLogin} =
+    Support();
 
   const navigate = useNavigate();
   const { userID, cart, setCart, setWishList } = useContext(LoginContext);
@@ -193,42 +198,42 @@ function Checkout() {
     }
   };
 
-  const handleClickCart = (id, noItem) => {
-    if (user) {
-      setCart((prevCart) => {
-        const newCart = [...prevCart];
+  // const handleClickCart = (id, noItem) => {
+  //   if (user) {
+  //     setCart((prevCart) => {
+  //       const newCart = [...prevCart];
 
-        let index = -1;
-        newCart.forEach((item, idx) => {
-          if (item.productID === id) {
-            index = idx;
-            return;
-          }
-        });
-        if (index !== -1) {
-          newCart[index].no += noItem;
-        } else {
-          let newProduct = {};
-          newProduct.productID = id;
-          newProduct.no = noItem;
-          newCart.push(newProduct);
-        }
+  //       let index = -1;
+  //       newCart.forEach((item, idx) => {
+  //         if (item.productID === id) {
+  //           index = idx;
+  //           return;
+  //         }
+  //       });
+  //       if (index !== -1) {
+  //         newCart[index].no += noItem;
+  //       } else {
+  //         let newProduct = {};
+  //         newProduct.productID = id;
+  //         newProduct.no = noItem;
+  //         newCart.push(newProduct);
+  //       }
 
-        const updatedUser = { ...user, cart: newCart };
-        localStorage.setItem("user", JSON.stringify(updatedUser));
+  //       const updatedUser = { ...user, cart: newCart };
+  //       localStorage.setItem("user", JSON.stringify(updatedUser));
 
-        return newCart;
-      });
+  //       return newCart;
+  //     });
 
-      setOpenAddCart(true);
-    } else {
-      setOpenAlertLogin(true);
-    }
-  };
+  //     setOpenAddCart(true);
+  //   } else {
+  //     setOpenAlertLogin(true);
+  //   }
+  // };
 
   return (
     <>
-      <Snackbar
+      {/* <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         open={openAddCart}
         onClose={handleCloseAddCart}
@@ -256,7 +261,15 @@ function Checkout() {
         >
           Please login to continue!
         </Alert>
-      </Snackbar>
+      </Snackbar> */}
+
+      <AlertMsg
+        openAddCart={openAddCart}
+        openAlertLogin={openAlertLogin}
+        handleCloseAddCart={handleCloseAddCart}
+        handleCloseAlertLogin={handleCloseAlertLogin}
+      />
+
       <div className="checkout_header">
         <Nav />
       </div>
@@ -378,7 +391,7 @@ function Checkout() {
                       onChange={(e) => {
                         setShippingInfo({
                           ...shippingInfo,
-                          postalCode: e.target.value.trim().toUpperCase(), 
+                          postalCode: e.target.value.trim().toUpperCase(),
                         });
                         if (invalidFields.includes("postalCode")) {
                           let newArr = invalidFields.filter(

@@ -28,7 +28,7 @@ function Footer() {
           <div className="footer_right--address footer_right--item">
             <LocationOnRoundedIcon className="footer_right--icon" />
             <div className="footer_right--text">
-              Etobicoke, Toronto, ON, Canada
+              Toronto, ON, Canada
             </div>
           </div>
           <div className="footer_right--phone footer_right--item">

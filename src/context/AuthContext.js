@@ -3,12 +3,10 @@
 import React, { useState, useEffect } from "react";
 import { createContext } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const LoginContext = createContext();
 
 function LoginProvider({ children }) {
-  const navigate = useNavigate();
   const [login, setLogin] = useState(
     localStorage.getItem("user") ? Boolean(localStorage.getItem("user")) : false
   );
@@ -54,9 +52,8 @@ function LoginProvider({ children }) {
   useEffect(() => {
     setWishList(JSON.parse(localStorage.getItem("user"))?.wishlist);
     setCart(JSON.parse(localStorage.getItem("user"))?.cart);
-    // console.log(wishlist)
   }, [login]);
-  // console.log(wishlist);
+
   useEffect(() => {
     if (login && userID.length > 0) {
       const updateData = async () => {
@@ -76,7 +73,6 @@ function LoginProvider({ children }) {
             //   },
             // }
           );
-          // console.log("DATA: ", data)
         } catch (error) {
           console.log(error);
         }
@@ -98,7 +94,6 @@ function LoginProvider({ children }) {
           setCart,
           userID,
           setUserID,
-          // checkIsLogin,
         }}
       >
         {children}

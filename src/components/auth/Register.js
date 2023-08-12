@@ -44,7 +44,6 @@ const Register = () => {
     } else {
       try {
         const data = await handleSubmit(username, email, password);
-        //console.log(data);
         if (data.data && data.data.success !== true) {
           setErrMessage(data.data.message);
         } else {

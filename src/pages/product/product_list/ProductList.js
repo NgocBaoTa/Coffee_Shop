@@ -41,6 +41,8 @@ function ProductList(props) {
                 handleLikedClick={props.handleLikedClick}
                 index={index}
                 handleClickCart={props.handleClickCart}
+                products={props.products}
+                setProducts={props.setProducts}
               />
             );
           })

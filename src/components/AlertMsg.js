@@ -1,28 +1,20 @@
 /** @format */
 
-import React, { useContext } from "react";
+import React from "react";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import { AlertContext } from "../context/AlertContext";
 
-function AlertMsg() {
-  const {
-    openAddCart,
-    openAlertLogin,
-    handleCloseAddCart,
-    handleCloseAlertLogin,
-  } = useContext(AlertContext);
-  
+function AlertMsg(props) {
   return (
     <>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        open={openAddCart}
-        onClose={handleCloseAddCart}
+        open={props.openAddCart}
+        onClose={props.handleCloseAddCart}
         autoHideDuration={6000}
       >
         <Alert
-          onClose={handleCloseAddCart}
+          onClose={props.handleCloseAddCart}
           severity="success"
           sx={{ width: "100%" }}
         >
@@ -32,12 +24,12 @@ function AlertMsg() {
 
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        open={openAlertLogin}
-        onClose={handleCloseAlertLogin}
+        open={props.openAlertLogin}
+        onClose={props.handleCloseAlertLogin}
         autoHideDuration={6000}
       >
         <Alert
-          onClose={handleCloseAlertLogin}
+          onClose={props.handleCloseAlertLogin}
           severity="warning"
           sx={{ width: "100%" }}
         >

@@ -55,8 +55,6 @@ function ContentModal(props) {
                 <div className="modal_main--name">
                   {props.name.toUpperCase()}
                 </div>
-                {/* <div className="modal_main--name">ORGANIC COFFEE</div> */}
-                {/* <div className="modal_main--price">$21.3</div> */}
                 <div className="modal_main--info">
                   <div className="modal_main--price">${props.price}</div>
                   <div className="modal_main--number">
@@ -112,14 +110,19 @@ function ContentModal(props) {
                       <FavoriteBorderRoundedIcon
                         className="modal_icon--item modal_main--love"
                         onClick={() => {
-                          props.handleLikedClick(props.id, props.index);
+                          props.handleLikedClick(props.id, props.index, props.products, props.setProducts);
                         }}
                       />
                     ) : (
                       <FavoriteRoundedIcon
                         className="modal_icon--item modal_main--loved"
                         onClick={() => {
-                          props.handleLikedClick(props.id, props.index);
+                          props.handleLikedClick(
+                            props.id,
+                            props.index,
+                            props.products,
+                            props.setProducts
+                          );
                         }}
                       />
                     )}
@@ -133,11 +136,6 @@ function ContentModal(props) {
                 ) : (
                   <></>
                 )}
-                {/* <div className="modal_info--desc">
-                  Okapi's artisan-grown Ugandan Specialty Highland Coffee has
-                  rich chocolate overtones with bright citrus and floral
-                  notes.
-                </div> */}
                 {props.story ? (
                   <div className="modal_info--story">
                     <div className="modal_desc--heading">STORY</div>
@@ -146,32 +144,9 @@ function ContentModal(props) {
                 ) : (
                   <></>
                 )}
-                {/* <div className="modal_info--story">
-                  <div className="modal_desc--heading">STORY</div>
-                  <div className="modal_desc--story">
-                    Okapi's artisan-grown Ugandan Specialty Highland Coffee has
-                    rich chocolate overtones with bright citrus and floral
-                    notes.
-                  </div>
-                </div> */}
                 <div className="modal_info--details">
                   <div className="modal_desc--heading">DETAILS</div>
                   <ul className="modal_details--list">
-                    {/* <li className="modal_details--item">
-                      Shipping cost is applied for each shipment.
-                    </li>
-
-                    <li className="modal_details--item">
-                      Future orders can be modified or cancelled at any point.
-                    </li>
-
-                    <li className="modal_details--item">
-                      Shipping cost is applied for each shipment.
-                    </li>
-
-                    <li className="modal_details--item">
-                      Future orders can be modified or cancelled at any point.
-                    </li> */}
                     {props.details?.map((item, index) => {
                       return (
                         <li key={index} className="modal_details--item">
@@ -187,7 +162,6 @@ function ContentModal(props) {
         </div>
       </Dialog>
     </>
-    // </div>
   );
 }
 

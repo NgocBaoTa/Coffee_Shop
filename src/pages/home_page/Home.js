@@ -12,6 +12,8 @@ import { AlertContext } from "../../context/AlertContext";
 
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import AlertMsg from "../../components/AlertMsg";
+import { Support } from "../../Support";
 
 function Home() {
   const {
@@ -22,10 +24,20 @@ function Home() {
     setOpenAlertLogin,
     setOpenAddCart,
   } = useContext(AlertContext);
+  //  const {
+  //    handleChangeCart,
+  //    handleCloseAddCart,
+  //    handleCloseAlertLogin,
+  //    handleDeleteProduct,
+  //    handleClickCart,
+  //    handleLikedClick,
+  //    openAddCart,
+  //    openAlertLogin,
+  //  } = Support();
 
   return (
     <div className="home_page">
-      <Snackbar
+      {/* <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         open={openAddCart}
         onClose={handleCloseAddCart}
@@ -53,16 +65,19 @@ function Home() {
         >
           Please login to continue!
         </Alert>
-      </Snackbar>
+      </Snackbar> */}
+
+      
+
       <Header />
       <Discover />
       <Style
-        setOpenAddCart={setOpenAddCart}
-        setOpenAlertLogin={setOpenAlertLogin}
+        // setOpenAddCart={setOpenAddCart}
+        // setOpenAlertLogin={setOpenAlertLogin}
       />
       <Recommended
-        setOpenAddCart={setOpenAddCart}
-        setOpenAlertLogin={setOpenAlertLogin}
+        // setOpenAddCart={setOpenAddCart}
+        // setOpenAlertLogin={setOpenAlertLogin}
       />
       <Chance />
       <Footer />

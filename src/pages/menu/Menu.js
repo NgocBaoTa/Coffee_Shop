@@ -13,18 +13,18 @@ import Snackbar from "@mui/material/Snackbar";
 import { AlertContext } from "../../context/AlertContext";
 
 function Menu() {
-  const {
-    openAddCart,
-    openAlertLogin,
-    handleCloseAddCart,
-    handleCloseAlertLogin,
-    setOpenAlertLogin,
-    setOpenAddCart,
-  } = useContext(AlertContext);
+  // const {
+  //   openAddCart,
+  //   openAlertLogin,
+  //   handleCloseAddCart,
+  //   handleCloseAlertLogin,
+  //   setOpenAlertLogin,
+  //   setOpenAddCart,
+  // } = useContext(AlertContext);
 
   return (
     <div className="menu_container">
-      <Snackbar
+      {/* <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         open={openAddCart}
         onClose={handleCloseAddCart}
@@ -52,19 +52,20 @@ function Menu() {
         >
           Please login to continue!
         </Alert>
-      </Snackbar>
+      </Snackbar> */}
+
       <Header />
       <CoffeeMenu
-        setOpenAddCart={setOpenAddCart}
-        setOpenAlertLogin={setOpenAlertLogin}
+        // setOpenAddCart={setOpenAddCart}
+        // setOpenAlertLogin={setOpenAlertLogin}
       />
       <BestSeller
-        setOpenAddCart={setOpenAddCart}
-        setOpenAlertLogin={setOpenAlertLogin}
+        // setOpenAddCart={setOpenAddCart}
+        // setOpenAlertLogin={setOpenAlertLogin}
       />
       <Pastry
-        setOpenAddCart={setOpenAddCart}
-        setOpenAlertLogin={setOpenAlertLogin}
+        // setOpenAddCart={setOpenAddCart}
+        // setOpenAlertLogin={setOpenAlertLogin}
       />
       <Footer />
     </div>

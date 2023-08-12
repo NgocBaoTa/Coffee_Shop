@@ -18,7 +18,6 @@
 
 .login_page--container {
   position: absolute;
-  /* height: 80vh; */
   height: auto;
   width: 80vw;
   top: 50%;
@@ -38,7 +37,6 @@
 
 .login_page--img {
   width: 70%;
-  /* height: 100%; */
   height: auto;
 }
 

@@ -8,29 +8,51 @@ import CartItem from "./cart_item/CartItem";
 import { LoginContext } from "../../context/AuthContext";
 import axios from "axios";
 import CartBottom from "./cart_bottom/CartBottom";
+import { AlertContext } from "../../context/AlertContext";
 
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import { Support } from "../../Support";
+import AlertMsg from "../../components/AlertMsg";
 
 function Cart() {
   const navigate = useNavigate();
+  const {
+    handleChangeCart,
+    handleCloseAddCart,
+    handleCloseAlertLogin,
+    handleDeleteProduct,
+    handleClickCart,
+    handleLikedClick,
+    openAddCart,
+    openAlertLogin,
+  } = Support();
+  // const {
+  //   openAddCart,
+  //   openAlertLogin,
+  //   handleCloseAddCart,
+  //   handleCloseAlertLogin,
+  //   setOpenAddCart,
+  //   setOpenAlertLogin,
+  // } = useContext(AlertContext);
+
   // ALERT  -  start
-  const [openAddCart, setOpenAddCart] = useState(false);
-  const [openAlertLogin, setOpenAlertLogin] = useState(false);
+  // const [openAddCart, setOpenAddCart] = useState(false);
+  // const [openAlertLogin, setOpenAlertLogin] = useState(false);
 
-  const handleCloseAddCart = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenAddCart(false);
-  };
+  // const handleCloseAddCart = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+  //   setOpenAddCart(false);
+  // };
 
-  const handleCloseAlertLogin = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenAlertLogin(false);
-  };
+  // const handleCloseAlertLogin = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+  //   setOpenAlertLogin(false);
+  // };
   // ALERT  -  end
 
   const { setCart, setWishList, cart } = useContext(LoginContext);
@@ -107,100 +129,101 @@ function Cart() {
     fetchData();
   }, [cart]);
 
-  const handleChangeCart = (id, noItem) => {
-    setCart((prevCart) => {
-      const newCart = [...prevCart];
+  // const handleChangeCart = (id, noItem) => {
+  //   setCart((prevCart) => {
+  //     const newCart = [...prevCart];
 
-      newCart.forEach((item, idx) => {
-        if (item.productID === id) {
-          newCart[idx].no = noItem;
-          return;
-        }
-      });
+  //     newCart.forEach((item, idx) => {
+  //       if (item.productID === id) {
+  //         newCart[idx].no = noItem;
+  //         return;
+  //       }
+  //     });
 
-      const updatedUser = { ...user, cart: newCart };
-      localStorage.setItem("user", JSON.stringify(updatedUser));
+  //     const updatedUser = { ...user, cart: newCart };
+  //     localStorage.setItem("user", JSON.stringify(updatedUser));
 
-      return newCart;
-    });
-  };
+  //     return newCart;
+  //   });
+  // };
 
-  const handleDeleteProduct = (id) => {
-    setCart((prevCart) => {
-      const newCart = [...prevCart];
+  // const handleDeleteProduct = (id) => {
+  //   setCart((prevCart) => {
+  //     const newCart = [...prevCart];
 
-      newCart.forEach((item, idx) => {
-        if (item.productID === id) {
-          newCart.splice(idx, 1);
-          return;
-        }
-      });
+  //     newCart.forEach((item, idx) => {
+  //       if (item.productID === id) {
+  //         newCart.splice(idx, 1);
+  //         return;
+  //       }
+  //     });
 
-      const updatedUser = { ...user, cart: newCart };
-      localStorage.setItem("user", JSON.stringify(updatedUser));
+  //     const updatedUser = { ...user, cart: newCart };
+  //     localStorage.setItem("user", JSON.stringify(updatedUser));
 
-      return newCart;
-    });
-  };
+  //     return newCart;
+  //   });
+  // };
 
-  const handleLikedClick = (id, index) => {
-    if (user) {
-      setWishList((prevWishlist) => {
-        const newWishlist = [...prevWishlist];
-        const newLikedProducts = [...products];
+  // const handleLikedClick = (id, index) => {
+  //   if (user) {
+  //     setWishList((prevWishlist) => {
+  //       const newWishlist = [...prevWishlist];
+  //       const newLikedProducts = [...products];
 
-        if (newLikedProducts[index].isLiked === false) {
-          newLikedProducts[index].isLiked = true;
-          newWishlist.push(id);
-        } else {
-          newLikedProducts[index].isLiked = false;
-          const indexToRemove = newWishlist.indexOf(id);
-          if (indexToRemove !== -1) {
-            newWishlist.splice(indexToRemove, 1);
-          }
-        }
+  //       if (newLikedProducts[index].isLiked === false) {
+  //         newLikedProducts[index].isLiked = true;
+  //         newWishlist.push(id);
+  //       } else {
+  //         newLikedProducts[index].isLiked = false;
+  //         const indexToRemove = newWishlist.indexOf(id);
+  //         if (indexToRemove !== -1) {
+  //           newWishlist.splice(indexToRemove, 1);
+  //         }
+  //       }
 
-        const updatedUser = { ...user, wishlist: newWishlist };
-        localStorage.setItem("user", JSON.stringify(updatedUser));
-        setProducts(newLikedProducts);
+  //       const updatedUser = { ...user, wishlist: newWishlist };
+  //       localStorage.setItem("user", JSON.stringify(updatedUser));
+  //       setProducts(newLikedProducts);
 
-        return newWishlist;
-      });
-    } else {
-      setOpenAlertLogin(true);
-    }
-  };
+  //       return newWishlist;
+  //     });
+  //   } else {
+  //     setOpenAlertLogin(true);
+  //   }
+  // };
 
-  const handleClickCart = (id, noItem) => {
-    setCart((prevCart) => {
-      const newCart = [...prevCart];
+  // const handleClickCart = (id, noItem) => {
+  //   setCart((prevCart) => {
+  //     const newCart = [...prevCart];
 
-      let index = -1;
-      newCart.forEach((item, idx) => {
-        if (item.productID === id) {
-          index = idx;
-          return;
-        }
-      });
-      if (index !== -1) {
-        newCart[index].no += noItem;
-      } else {
-        let newProduct = {};
-        newProduct.productID = id;
-        newProduct.no = noItem;
-        newCart.push(newProduct);
-      }
+  //     let index = -1;
+  //     newCart.forEach((item, idx) => {
+  //       if (item.productID === id) {
+  //         index = idx;
+  //         return;
+  //       }
+  //     });
+  //     if (index !== -1) {
+  //       newCart[index].no += noItem;
+  //     } else {
+  //       let newProduct = {};
+  //       newProduct.productID = id;
+  //       newProduct.no = noItem;
+  //       newCart.push(newProduct);
+  //     }
 
-      const updatedUser = { ...user, cart: newCart };
-      localStorage.setItem("user", JSON.stringify(updatedUser));
+  //     const updatedUser = { ...user, cart: newCart };
+  //     localStorage.setItem("user", JSON.stringify(updatedUser));
 
-      return newCart;
-    });
+  //     return newCart;
+  //   });
 
-    setOpenAddCart(true);
-  };
+  //   setOpenAddCart(true);
+  // };
 
   // Handle click CHECKBOX  -  START
+
   const handleChooseAll = (e) => {
     setChosenAll(e.target.checked);
 
@@ -244,7 +267,6 @@ function Cart() {
   };
   // Handle click CHECKBOX  -  END
 
-
   // Add space at the bottom  -  START
   const elRef = useRef();
   const [height, setHeight] = useState(0);
@@ -260,7 +282,7 @@ function Cart() {
   return (
     <>
       <div>
-        <Snackbar
+        {/* <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
           open={openAddCart}
           onClose={handleCloseAddCart}
@@ -288,10 +310,17 @@ function Cart() {
           >
             Please login to continue!
           </Alert>
-        </Snackbar>
+        </Snackbar> */}
+
+        <AlertMsg
+          openAddCart={openAddCart}
+          openAlertLogin={openAlertLogin}
+          handleCloseAddCart={handleCloseAddCart}
+          handleCloseAlertLogin={handleCloseAlertLogin}
+        />
 
         <Header />
-        
+
         <div className="cart_container grid wide">
           <div className="cart_table--header">
             <input
@@ -363,6 +392,8 @@ function Cart() {
                     handleChangeCart={handleChangeCart}
                     handleDeleteProduct={handleDeleteProduct}
                     handleChooseProduct={handleChooseProduct}
+                    products={products}
+                    setProducts={setProducts}
                   />
                 );
               })}

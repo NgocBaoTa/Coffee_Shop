@@ -25,6 +25,8 @@ function SingleCard(props) {
           handleClickCart={props.handleClickCart}
           productSold={props.productSold}
           productQuantity={props.productQuantity}
+          products={props.products}
+          setProducts={props.setProducts}
         >
           <img className="singleCard_img" src={props.src} alt="coffee" />
           <div className="singleCard_main--name">{props.name}</div>
@@ -42,14 +44,24 @@ function SingleCard(props) {
               <FavoriteRoundedIcon
                 className="singleCard_icon--loved"
                 onClick={() => {
-                  props.handleLikedClick(props.id, props.index);
+                  props.handleLikedClick(
+                    props.id,
+                    props.index,
+                    props.products,
+                    props.setProducts
+                  );
                 }}
               />
             ) : (
               <FavoriteBorderRoundedIcon
                 className="singleCard_icon--love"
                 onClick={() => {
-                  props.handleLikedClick(props.id, props.index);
+                  props.handleLikedClick(
+                    props.id,
+                    props.index,
+                    props.products,
+                    props.setProducts
+                  );
                 }}
               />
             )}

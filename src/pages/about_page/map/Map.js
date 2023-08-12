@@ -40,7 +40,6 @@ export default function Map() {
     fetchCoordinates();
   }, [google_api_key, address]);
 
-  // console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
   if (!isLoaded) {
     return <div>Loading...</div>;
   }

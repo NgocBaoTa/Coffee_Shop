@@ -35,6 +35,8 @@ function CartItem(props) {
             noOfItem={noItem}
             productQuantity={props.productQuantity}
             productSold={props.productSold}
+            products={props.products}
+            setProducts={props.setProducts}
           >
             <div className="cart_item--product">
               <img

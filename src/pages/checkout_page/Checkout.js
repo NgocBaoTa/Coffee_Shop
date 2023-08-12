@@ -96,28 +96,35 @@ function Checkout() {
     setInvalidFields(() => checkValidation());
     try {
       if (checkValidation().length === 0) {
-        const data = await axios.post("/orders", {
-          customerID: user.userID,
-          orderReceiver: shippingInfo.name,
-          orderProducts: product,
-          orderAddress: shippingInfo.address,
-          orderPostalCode: shippingInfo.postalCode,
-          orderPhone: +shippingInfo.phone,
-          orderPayMethod: paymentInfo.method,
-          orderCardholder: paymentInfo.cardHolder,
-          orderCardNumber: +paymentInfo.cardNumber,
-          orderExpireDate: paymentInfo.expireDate,
-          orderCVC: +paymentInfo.cvc,
-          orderSubtotal: subtotal,
-        });
+        const data = await axios.post(
+          "https://coffee-shop-5r5c.onrender.com/orders",
+          // "/orders",
+          {
+            customerID: user.userID,
+            orderReceiver: shippingInfo.name,
+            orderProducts: product,
+            orderAddress: shippingInfo.address,
+            orderPostalCode: shippingInfo.postalCode,
+            orderPhone: +shippingInfo.phone,
+            orderPayMethod: paymentInfo.method,
+            orderCardholder: paymentInfo.cardHolder,
+            orderCardNumber: +paymentInfo.cardNumber,
+            orderExpireDate: paymentInfo.expireDate,
+            orderCVC: +paymentInfo.cvc,
+            orderSubtotal: subtotal,
+          }
+        );
 
         checkoutProducts.forEach(async (product) => {
           let quantity = product.productQuantity;
           let sold = product.productSold;
-          await axios.put(`/products/${product.id}`, {
-            productQuantity: quantity - product.noOfItems,
-            productSold: sold + product.noOfItems,
-          });
+          await axios.put(
+            `https://coffee-shop-5r5c.onrender.com/products/${product.id}`,
+            {
+              productQuantity: quantity - product.noOfItems,
+              productSold: sold + product.noOfItems,
+            }
+          );
         });
 
         const updatedCart = cart.filter(

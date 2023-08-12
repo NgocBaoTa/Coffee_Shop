@@ -19,6 +19,7 @@ function SearchBar(props) {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [props.searchText]);
+  
   return (
     <div className="grid wide">
       <div className="search_bar--container">

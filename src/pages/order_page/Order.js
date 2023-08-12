@@ -12,7 +12,9 @@ function Order() {
 
   const fetchData = async () => {
     try {
-      let data = await axios.get(`/orders/search?customerID=${user.userID}`);
+      let data = await axios.get(
+        `https://coffee-shop-5r5c.onrender.com/orders/search?customerID=${user.userID}`
+      );
 
       let orderList = data.data;
       orderList.forEach((order) => {

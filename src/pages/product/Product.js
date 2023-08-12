@@ -28,7 +28,8 @@ function Product() {
   const fetchData = async () => {
     try {
       let data = await axios.get(
-        "/products?categoryName=Product"
+        "https://coffee-shop-5r5c.onrender.com/products?categoryName=Product"
+        // "/products?categoryName=Product"
         // "https://coffee-shop-ony3.onrender.com/products?categoryName=Product"
       );
 
@@ -62,7 +63,7 @@ function Product() {
   const searchProduct = async () => {
     try {
       const data = await axios.get(
-        `/products/search?searchText=${searchText}`
+        `https://coffee-shop-5r5c.onrender.com/products/search?searchText=${searchText}`
         // `https://coffee-shop-ony3.onrender.com/products/search?searchText=${searchText}`
       );
 

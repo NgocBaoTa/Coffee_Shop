@@ -30,7 +30,9 @@ function Wishlist() {
   const fetchData = async () => {
     try {
       let data = await axios.get(
-        "/products"
+        "https://coffee-shop-5r5c.onrender.com/products"
+
+        // "/products"
         // "https://coffee-shop-ony3.onrender.com/products?categoryName=Product"
       );
 

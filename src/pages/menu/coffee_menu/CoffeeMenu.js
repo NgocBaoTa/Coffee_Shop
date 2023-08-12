@@ -27,8 +27,9 @@ function CoffeeMenu() {
     const fetchData = async () => {
       try {
         let data = await axios.get(
-          "/products?categoryName=Coffee"
+          "https://coffee-shop-5r5c.onrender.com/products?categoryName=Coffee"
 
+          // "/products?categoryName=Coffee"
           // "https://coffee-shop-ony3.onrender.com/products?categoryName=Coffee"
         );
 

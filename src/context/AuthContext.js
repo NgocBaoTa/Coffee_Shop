@@ -59,7 +59,8 @@ function LoginProvider({ children }) {
       const updateData = async () => {
         try {
           let data = await axios.put(
-            `/customers/${userID}`,
+            `https://coffee-shop-5r5c.onrender.com/customers/${userID}`,
+            // `/customers/${userID}`,
             // "https://coffee-shop-ony3.onrender.com/customers",
             {
               cart,

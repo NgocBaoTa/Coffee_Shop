@@ -111,7 +111,7 @@ export const Support = () => {
 
       return newCart;
     });
-
+    
     setOpenAddCart(true);
   };
 
@@ -122,9 +122,9 @@ export const Support = () => {
     handleDeleteProduct,
     handleClickCart,
     handleLikedClick,
-    openAddCart, 
-    openAlertLogin, 
-    setOpenAddCart, 
-    setOpenAlertLogin
+    openAddCart,
+    openAlertLogin,
+    setOpenAddCart,
+    setOpenAlertLogin,
   };
 };

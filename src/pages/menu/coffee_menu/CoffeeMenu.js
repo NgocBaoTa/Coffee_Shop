@@ -21,6 +21,7 @@ function CoffeeMenu() {
     openAddCart,
     openAlertLogin,
   } = Support();
+  
   let user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {

@@ -80,6 +80,8 @@ function LoginProvider({ children }) {
       };
 
       updateData();
+
+      console.log("updated")
     }
   }, [login, wishlist, cart]);
 

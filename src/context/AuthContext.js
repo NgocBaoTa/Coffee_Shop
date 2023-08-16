@@ -54,34 +54,57 @@ function LoginProvider({ children }) {
     setCart(JSON.parse(localStorage.getItem("user"))?.cart);
   }, [login]);
 
+  // useEffect(() => {
+  //   if (login && userID.length > 0) {
+  //     console.log("first")
+  //     const updateData = async () => {
+  //       try {
+  //         let data = await axios.put(
+  //           `https://coffee-shop-5r5c.onrender.com/customers/${userID}`,
+  //           // `/customers/${userID}`,
+  //           // "https://coffee-shop-ony3.onrender.com/customers",
+  //           {
+  //             cart,
+  //             wishlist,
+  //           }
+  //           // {
+  //           //   headers: {
+  //           //     Authorization: `Bearer ${
+  //           //       JSON.parse(localStorage.getItem("user")).user_token
+  //           //     }`,
+  //           //   },
+  //           // }
+  //         );
+
+  //         console.log("DATA: ", data)
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     };
+
+  //     updateData();
+  //   }
+  // }, [login, wishlist, cart]);
+
   useEffect(() => {
     if (login && userID.length > 0) {
       const updateData = async () => {
         try {
-          let data = await axios.put(
+          const data = await axios.put(
             `https://coffee-shop-5r5c.onrender.com/customers/${userID}`,
-            // `/customers/${userID}`,
-            // "https://coffee-shop-ony3.onrender.com/customers",
             {
               cart,
               wishlist,
             }
-            // {
-            //   headers: {
-            //     Authorization: `Bearer ${
-            //       JSON.parse(localStorage.getItem("user")).user_token
-            //     }`,
-            //   },
-            // }
           );
         } catch (error) {
-          console.log(error);
+          console.error("Error:", error);
         }
       };
 
-      updateData();
-
-      console.log("updated")
+      setTimeout(() => {
+        updateData();
+      }, 100);
     }
   }, [login, wishlist, cart]);
 

@@ -26,7 +26,7 @@ function AlertMsg(props) {
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         open={props.openAlertLogin}
         onClose={props.handleCloseAlertLogin}
-        autoHideDuration={6000}
+        autoHideDuration={5000}
       >
         <Alert
           onClose={props.handleCloseAlertLogin}

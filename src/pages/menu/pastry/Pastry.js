@@ -59,8 +59,7 @@ function Pastry() {
         openAddCart={openAddCart}
         openAlertLogin={openAlertLogin}
         handleCloseAddCart={handleCloseAddCart}
-        handleClo
-        seAlertLogin={handleCloseAlertLogin}
+        handleCloseAlertLogin={handleCloseAlertLogin}
       />
 
       <div className="pastry_container">

@@ -8,17 +8,17 @@ export const Support = () => {
   const [openAddCart, setOpenAddCart] = useState(false);
   const [openAlertLogin, setOpenAlertLogin] = useState(false);
 
-  const handleCloseAddCart = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
+  const handleCloseAddCart = (reason) => {
+    // if (reason === "clickaway") {
+    //   return;
+    // }
     setOpenAddCart(false);
   };
 
-  const handleCloseAlertLogin = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
+  const handleCloseAlertLogin = (reason) => {
+    // if (reason === "clickaway") {
+    //   return;
+    // }
     setOpenAlertLogin(false);
   };
 
@@ -87,32 +87,37 @@ export const Support = () => {
   };
 
   const handleClickCart = (id, noItem) => {
-    setCart((prevCart) => {
-      const newCart = [...prevCart];
+    if (user) {
+      setCart((prevCart) => {
+        // const newCart = [...prevCart];
+        const newCart = Array.isArray(prevCart) ? [...prevCart] : [];
 
-      let index = -1;
-      newCart.forEach((item, idx) => {
-        if (item.productID === id) {
-          index = idx;
-          return;
+        let index = -1;
+        newCart.forEach((item, idx) => {
+          if (item.productID === id) {
+            index = idx;
+            return;
+          }
+        });
+        if (index !== -1) {
+          newCart[index].no += noItem;
+        } else {
+          let newProduct = {};
+          newProduct.productID = id;
+          newProduct.no = noItem;
+          newCart.push(newProduct);
         }
+
+        const updatedUser = { ...user, cart: newCart };
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+
+        return newCart;
       });
-      if (index !== -1) {
-        newCart[index].no += noItem;
-      } else {
-        let newProduct = {};
-        newProduct.productID = id;
-        newProduct.no = noItem;
-        newCart.push(newProduct);
-      }
 
-      const updatedUser = { ...user, cart: newCart };
-      localStorage.setItem("user", JSON.stringify(updatedUser));
-
-      return newCart;
-    });
-    
-    setOpenAddCart(true);
+      setOpenAddCart(true);
+    } else {
+      setOpenAlertLogin(true);
+    }
   };
 
   return {

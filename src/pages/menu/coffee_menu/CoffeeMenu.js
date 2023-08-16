@@ -9,7 +9,7 @@ import ShoppingCartCheckoutRoundedIcon from "@mui/icons-material/ShoppingCartChe
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import { Support } from "../../../Support";
-import { Alert } from "@mui/material";
+import AlertMsg from "../../../components/AlertMsg";
 
 function CoffeeMenu() {
   const [products, setProducts] = useState([]);
@@ -61,7 +61,7 @@ function CoffeeMenu() {
 
   return (
     <>
-      <Alert
+      <AlertMsg
         openAddCart={openAddCart}
         openAlertLogin={openAlertLogin}
         handleCloseAddCart={handleCloseAddCart}

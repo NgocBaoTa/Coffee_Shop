@@ -9,16 +9,16 @@ export const Support = () => {
   const [openAlertLogin, setOpenAlertLogin] = useState(false);
 
   const handleCloseAddCart = (reason) => {
-    // if (reason === "clickaway") {
-    //   return;
-    // }
+    if (reason === "clickaway") {
+      return;
+    }
     setOpenAddCart(false);
   };
 
   const handleCloseAlertLogin = (reason) => {
-    // if (reason === "clickaway") {
-    //   return;
-    // }
+    if (reason === "clickaway") {
+      return;
+    }
     setOpenAlertLogin(false);
   };
 

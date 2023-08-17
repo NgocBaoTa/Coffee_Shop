@@ -21,7 +21,7 @@ function CoffeeMenu() {
     openAddCart,
     openAlertLogin,
   } = Support();
-  
+
   let user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
@@ -129,14 +129,24 @@ function CoffeeMenu() {
                         <FavoriteRoundedIcon
                           className="singleCard_icon--loved"
                           onClick={() => {
-                            handleLikedClick(item.id, index);
+                            handleLikedClick(
+                              item.id,
+                              index,
+                              products,
+                              setProducts
+                            );
                           }}
                         />
                       ) : (
                         <FavoriteBorderRoundedIcon
                           className="singleCard_icon--love"
                           onClick={() => {
-                            handleLikedClick(item.id, index);
+                            handleLikedClick(
+                              item.id,
+                              index,
+                              products,
+                              setProducts
+                            );
                           }}
                         />
                       )}

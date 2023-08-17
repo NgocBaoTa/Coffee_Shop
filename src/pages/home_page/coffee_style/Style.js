@@ -23,9 +23,9 @@ function Style() {
     const fetchData = async () => {
       try {
         let data = await axios.get(
-          "https://coffee-shop-5r5c.onrender.com/products/new-coffee"
+          // "https://coffee-shop-5r5c.onrender.com/products/new-coffee"
 
-          // "/products/new-coffee"
+          "/products/new-coffee"
           // "https://coffee-shop-ony3.onrender.com/products/new-coffee"
         );
 

@@ -13,7 +13,8 @@ function Order() {
   const fetchData = async () => {
     try {
       let data = await axios.get(
-        `https://coffee-shop-5r5c.onrender.com/orders/search?customerID=${user.userID}`
+        // `https://coffee-shop-5r5c.onrender.com/orders/search?customerID=${user.userID}`
+        `/orders/search?customerID=${user.userID}`
       );
 
       let orderList = data.data;

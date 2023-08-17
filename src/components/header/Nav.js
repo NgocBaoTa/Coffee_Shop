@@ -4,6 +4,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./nav.css";
 import { LoginContext } from "../../context/AuthContext";
+import axios from "axios";
 
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
@@ -70,18 +71,27 @@ function Nav() {
     setAnchorElUser(null);
   };
 
-  const handleLogout = () => {
-    setLogin(false);
-    localStorage.clear();
-    if (
-      window.location.pathname === "/cart" ||
-      window.location.pathname === "/wishlist" ||
-      window.location.pathname === "/orders" || 
-      window.location.pathname === "/checkout"
-    ) {
-      navigate("/");
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        // "https://coffee-shop-5r5c.onrender.com/cus-auth/logout",
+        "/cus-auth/logout"
+      );
+
+      setLogin(false);
+      localStorage.clear();
+      if (
+        window.location.pathname === "/cart" ||
+        window.location.pathname === "/wishlist" ||
+        window.location.pathname === "/orders" ||
+        window.location.pathname === "/checkout"
+      ) {
+        navigate("/");
+      }
+      window.location.reload();
+    } catch (error) {
+      console.error("Error:", error);
     }
-    window.location.reload();
   };
 
   const [isActive, setIsActive] = useState(false);
@@ -268,7 +278,7 @@ function Nav() {
               </>
             ) : (
               <>
-                  <div className="l-3"></div>
+                <div className="l-3"></div>
                 <NavLink
                   to="/auth/login"
                   className="nav_right--login nav_right--item l-2 m-5"

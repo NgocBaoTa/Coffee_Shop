@@ -28,9 +28,9 @@ function Recommended() {
     const fetchData = async () => {
       try {
         let data = await axios.get(
-          "https://coffee-shop-5r5c.onrender.com/products/recommend-products"
+          // "https://coffee-shop-5r5c.onrender.com/products/recommend-products"
 
-          // "/products/recommend-products"
+          "/products/recommend-products"
           // "https://coffee-shop-ony3.onrender.com/products/recommend-products"
         );
 

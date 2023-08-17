@@ -97,8 +97,8 @@ function Checkout() {
     try {
       if (checkValidation().length === 0) {
         const data = await axios.post(
-          "https://coffee-shop-5r5c.onrender.com/orders",
-          // "/orders",
+          // "https://coffee-shop-5r5c.onrender.com/orders",
+          "/orders",
           {
             customerID: user.userID,
             orderReceiver: shippingInfo.name,
@@ -119,7 +119,8 @@ function Checkout() {
           let quantity = product.productQuantity;
           let sold = product.productSold;
           await axios.put(
-            `https://coffee-shop-5r5c.onrender.com/products/${product.id}`,
+            // `https://coffee-shop-5r5c.onrender.com/products/${product.id}`,
+            `/products/${product.id}`,
             {
               productQuantity: quantity - product.noOfItems,
               productSold: sold + product.noOfItems,

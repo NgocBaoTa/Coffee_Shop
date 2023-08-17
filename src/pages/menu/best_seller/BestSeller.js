@@ -23,9 +23,9 @@ function BestSeller() {
     const fetchData = async () => {
       try {
         let data = await axios.get(
-          "https://coffee-shop-5r5c.onrender.com/products/best-seller"
+          // "https://coffee-shop-5r5c.onrender.com/products/best-seller"
 
-          // "/products/best-seller"
+          "/products/best-seller"
           // "https://coffee-shop-ony3.onrender.com/products/best-seller"
         );
 

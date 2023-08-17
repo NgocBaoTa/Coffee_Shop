@@ -1,6 +1,5 @@
 {
   "name": "coffee_shop",
-  "homepage": "https://ngocbaota.github.io/Coffee_Shop",
   "version": "0.1.0",
   "private": true,
   "proxy": "https://coffee-shop-5r5c.onrender.com",

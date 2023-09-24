@@ -2,7 +2,7 @@
   "name": "coffee_shop",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8000",
+  "proxy": "https://coffee-shop-5r5c.onrender.com",
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",

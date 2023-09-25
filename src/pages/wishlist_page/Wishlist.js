@@ -30,9 +30,8 @@ function Wishlist() {
   const fetchData = async () => {
     try {
       let data = await axios.get(
-        // "https://coffee-shop-5r5c.onrender.com/products"
-
-        "/products"
+        "https://coffee-shop-5r5c.onrender.com/products"
+        // "/products"
         // "https://coffee-shop-ony3.onrender.com/products?categoryName=Product"
       );
 
@@ -131,14 +130,24 @@ function Wishlist() {
                               <FavoriteRoundedIcon
                                 className="singleCard_icon--loved"
                                 onClick={() => {
-                                  handleLikedClick(item.id, index, products, setProducts);
+                                  handleLikedClick(
+                                    item.id,
+                                    index,
+                                    products,
+                                    setProducts
+                                  );
                                 }}
                               />
                             ) : (
                               <FavoriteBorderRoundedIcon
                                 className="singleCard_icon--love"
                                 onClick={() => {
-                                  handleLikedClick(item.id, index, products, setProducts);
+                                  handleLikedClick(
+                                    item.id,
+                                    index,
+                                    products,
+                                    setProducts
+                                  );
                                 }}
                               />
                             )}

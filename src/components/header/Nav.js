@@ -74,8 +74,8 @@ function Nav() {
   const handleLogout = async () => {
     try {
       await axios.post(
-        // "https://coffee-shop-5r5c.onrender.com/cus-auth/logout",
-        "/cus-auth/logout"
+        "https://coffee-shop-5r5c.onrender.com/cus-auth/logout",
+        // "/cus-auth/logout"
       );
 
       setLogin(false);

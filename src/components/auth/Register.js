@@ -18,8 +18,8 @@ const Register = () => {
 
   const handleSubmit = (username, email, password) => {
     return axios.post(
-      // "https://coffee-shop-5r5c.onrender.com/cus-auth/register",
-      "/cus-auth/register",
+      "https://coffee-shop-5r5c.onrender.com/cus-auth/register",
+      // "/cus-auth/register",
       // "https://coffee-shop-ony3.onrender.com/cus_auth/register",
       {
         username,

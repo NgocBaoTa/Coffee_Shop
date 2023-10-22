@@ -54,44 +54,13 @@ function LoginProvider({ children }) {
     setCart(JSON.parse(localStorage.getItem("user"))?.cart);
   }, [login]);
 
-  // useEffect(() => {
-  //   if (login && userID.length > 0) {
-  //     console.log("first")
-  //     const updateData = async () => {
-  //       try {
-  //         let data = await axios.put(
-  //           `https://coffee-shop-5r5c.onrender.com/customers/${userID}`,
-  //           // `/customers/${userID}`,
-  //           // "https://coffee-shop-ony3.onrender.com/customers",
-  //           {
-  //             cart,
-  //             wishlist,
-  //           }
-  //           // {
-  //           //   headers: {
-  //           //     Authorization: `Bearer ${
-  //           //       JSON.parse(localStorage.getItem("user")).user_token
-  //           //     }`,
-  //           //   },
-  //           // }
-  //         );
-
-  //         console.log("DATA: ", data)
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-
-  //     updateData();
-  //   }
-  // }, [login, wishlist, cart]);
 
   useEffect(() => {
     if (login && userID.length > 0) {
       const updateData = async () => {
         try {
           const data = await axios.put(
-            `https://coffee-shop-5r5c.onrender.com/customers/${userID}`,
+            `https://jealous-gray-chicken.cyclic.app//customers/${userID}`,
             // `/customers/${userID}`,
             {
               cart,

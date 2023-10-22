@@ -34,9 +34,8 @@ function Cart() {
   const fetchData = async () => {
     try {
       let data = await axios.get(
-        "https://coffee-shop-5r5c.onrender.com/products"
+        "https://jealous-gray-chicken.cyclic.app//products"
         // "/products"
-        // "https://coffee-shop-ony3.onrender.com/products?categoryName=Product"
       );
 
       let productArr = [];

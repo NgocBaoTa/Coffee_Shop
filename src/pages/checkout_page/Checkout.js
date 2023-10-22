@@ -97,7 +97,7 @@ function Checkout() {
     try {
       if (checkValidation().length === 0) {
         const data = await axios.post(
-          "https://coffee-shop-5r5c.onrender.com/orders",
+          "https://jealous-gray-chicken.cyclic.app//orders",
           // "/orders",
           {
             customerID: user.userID,
@@ -119,7 +119,7 @@ function Checkout() {
           let quantity = product.productQuantity;
           let sold = product.productSold;
           await axios.put(
-            `https://coffee-shop-5r5c.onrender.com/products/${product.id}`,
+            `https://jealous-gray-chicken.cyclic.app//products/${product.id}`,
             // `/products/${product.id}`,
             {
               productQuantity: quantity - product.noOfItems,

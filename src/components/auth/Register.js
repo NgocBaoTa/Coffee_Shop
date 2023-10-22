@@ -18,9 +18,8 @@ const Register = () => {
 
   const handleSubmit = (username, email, password) => {
     return axios.post(
-      "https://coffee-shop-5r5c.onrender.com/cus-auth/register",
+      "https://jealous-gray-chicken.cyclic.app//cus-auth/register",
       // "/cus-auth/register",
-      // "https://coffee-shop-ony3.onrender.com/cus_auth/register",
       {
         username,
         email,
@@ -68,19 +67,19 @@ const Register = () => {
     navigate("/");
   };
 
-   useEffect(() => {
-     const handleKeyDown = (event) => {
-       if (event.keyCode === 13) {
-         handleRegister(event);
-       }
-     };
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.keyCode === 13) {
+        handleRegister(event);
+      }
+    };
 
-     window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
 
-     return () => {
-       window.removeEventListener("keydown", handleKeyDown);
-     };
-   }, [username, email, password]);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [username, email, password]);
 
   return (
     <div className="register_page--bg">

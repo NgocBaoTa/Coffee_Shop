@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import axios from "axios";
 import SingleCard from "../../../components/single_card/SingleCard";
@@ -14,8 +14,8 @@ function Style() {
     handleCloseAlertLogin,
     handleClickCart,
     handleLikedClick,
-    openAddCart, 
-    openAlertLogin
+    openAddCart,
+    openAlertLogin,
   } = Support();
   let user = JSON.parse(localStorage.getItem("user"));
 
@@ -23,9 +23,8 @@ function Style() {
     const fetchData = async () => {
       try {
         let data = await axios.get(
-          "https://coffee-shop-5r5c.onrender.com/products/new-coffee"
+          "https://jealous-gray-chicken.cyclic.app//products/new-coffee"
           // "/products/new-coffee"
-          // "https://coffee-shop-ony3.onrender.com/products/new-coffee"
         );
 
         if (user) {

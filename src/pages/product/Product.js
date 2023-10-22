@@ -28,9 +28,8 @@ function Product() {
   const fetchData = async () => {
     try {
       let data = await axios.get(
-        "https://coffee-shop-5r5c.onrender.com/products?categoryName=Product"
+        "https://jealous-gray-chicken.cyclic.app//products?categoryName=Product"
         // "/products?categoryName=Product"
-        // "https://coffee-shop-ony3.onrender.com/products?categoryName=Product"
       );
 
       if (user) {
@@ -63,9 +62,8 @@ function Product() {
   const searchProduct = async () => {
     try {
       const data = await axios.get(
-        `https://coffee-shop-5r5c.onrender.com/products/search?searchText=${searchText}`
+        `https://jealous-gray-chicken.cyclic.app//products/search?searchText=${searchText}`
         // `/products/search?searchText=${searchText}`
-        // `https://coffee-shop-ony3.onrender.com/products/search?searchText=${searchText}`
       );
 
       if (user) {

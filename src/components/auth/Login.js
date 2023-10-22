@@ -55,9 +55,8 @@ function Login() {
   };
 
   const handleSubmit = (email, password) => {
-    // https://coffee-shop-ony3.onrender.com/cus_auth/login
     return axios.post(
-      "https://coffee-shop-5r5c.onrender.com/cus-auth/login",
+      "https://jealous-gray-chicken.cyclic.app//cus-auth/login",
       // "/cus-auth/login",
       {
         email,

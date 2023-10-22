@@ -2,7 +2,7 @@
   "name": "coffee_shop",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://coffee-shop-5r5c.onrender.com",
+  "proxy": "https://jealous-gray-chicken.cyclic.app/",
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",

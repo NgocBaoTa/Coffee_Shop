@@ -23,9 +23,8 @@ function Pastry() {
     const fetchData = async () => {
       try {
         let data = await axios.get(
-          "https://coffee-shop-5r5c.onrender.com/products?categoryName=Pastries"
+          "https://jealous-gray-chicken.cyclic.app//products?categoryName=Pastries"
           // "/products?categoryName=Pastries"
-          // "https://coffee-shop-ony3.onrender.com/products?categoryName=Patries"
         );
 
         if (user) {

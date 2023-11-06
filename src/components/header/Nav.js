@@ -73,10 +73,10 @@ function Nav() {
 
   const handleLogout = async () => {
     try {
-      await axios.post(
-        "https://jealous-gray-chicken.cyclic.app//cus-auth/logout"
-        // "/cus-auth/logout"
-      );
+      // await axios.post(
+      //   "https://jealous-gray-chicken.cyclic.app//cus-auth/logout"
+      //   // "/cus-auth/logout"
+      // );
 
       setLogin(false);
       localStorage.clear();

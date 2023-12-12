@@ -34,7 +34,7 @@ To install the program, follow these steps:
 
 - Clone the repository:
 ```
-git clone https://github.com/your-username/coffee_shop.git
+git clone [https://github.com/your-username/coffee_shop.git](https://github.com/NgocBaoTa/Coffee_Shop.git)
 ```
 
 - Navigate to the project directory:

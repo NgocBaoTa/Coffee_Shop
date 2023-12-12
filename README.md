@@ -1,11 +1,15 @@
 # Coffee_Shop
 
-This project is a client-side application for a Coffee Shop, built using ReactJS. 
+This project is a client-side application for a Coffee Shop, built using ReactJS. <br/>
 The server-side code is located in a separate repository, check it [here](https://github.com/NgocBaoTa/Coffee_Shop--server).
   
 ## Description
 
+<img width="955" alt="Screenshot 2023-12-11 235307" src="https://github.com/NgocBaoTa/Coffee_Shop/assets/96873510/4c5834b3-3906-4bb5-8580-23bf0cfaf332"> <br/>
 
+<img width="955" alt="Screenshot 2023-12-11 235456" src="https://github.com/NgocBaoTa/Coffee_Shop--server/assets/96873510/8a408d4b-c997-4104-8965-41ea08404f74"> <br/>
+
+<img width="955" alt="Screenshot 2023-12-11 235604" src="https://github.com/NgocBaoTa/Coffee_Shop--server/assets/96873510/35c095bc-b64c-476a-8f37-5d6cb7754a51"> <br/>
 
 ## Built with
 
@@ -28,17 +32,17 @@ Before installing the program, ensure you have the following dependencies instal
 
 To install the program, follow these steps:
 
-1. Clone the repository:
+- Clone the repository:
 ```
 git clone https://github.com/your-username/coffee_shop.git
 ```
 
-1. Navigate to the project directory:
+- Navigate to the project directory:
 ```
 cd coffee_shop
 ```
 
-3. Install dependencies:
+- Install dependencies:
 ```
 npm install
 ```

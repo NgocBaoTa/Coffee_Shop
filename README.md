@@ -24,8 +24,8 @@ The server-side code is located in a separate repository, check it [here](https:
 
 Before installing the program, ensure you have the following dependencies installed:
 
-* Node.js
-* npm (Node Package Manager)
+* [Node.js](https://nodejs.org/en/download)
+* [npm](https://www.npmjs.com/) (Node Package Manager)
 * Operating System: Windows 10 / MacOS / Linux
 
 ### Installing
@@ -35,11 +35,6 @@ To install the program, follow these steps:
 - Clone the repository:
 ```
 git clone https://github.com/NgocBaoTa/Coffee_Shop.git
-```
-
-- Navigate to the project directory:
-```
-cd coffee_shop
 ```
 
 - Install dependencies:
